@@ -7,7 +7,13 @@ import com.meetingrooms.application.query.ListRoomsHandler;
 import com.meetingrooms.application.query.ListRoomsQuery;
 import com.meetingrooms.application.query.ListRoomsResult;
 import com.meetingrooms.domain.model.Room;
+import com.meetingrooms.infrastructure.config.OpenApiConfig;
 import com.meetingrooms.shared.ErrorMessages;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +27,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/rooms")
+@Tag(name = "Rooms")
 public class RoomController {
 
     private final CreateRoomHandler createRoomHandler;
@@ -32,6 +39,14 @@ public class RoomController {
     }
 
     @PostMapping
+    @Operation(summary = "Create room")
+    @SecurityRequirement(name = OpenApiConfig.BEARER_JWT_SCHEME)
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Validation failed"),
+            @ApiResponse(responseCode = "403", description = "Unauthenticated"),
+            @ApiResponse(responseCode = "409", description = "Room name already exists")
+    })
     public ResponseEntity<RoomResponse> create(@RequestBody CreateRoomRequest request) {
         if (request == null || request.capacity() == null) {
             throw new ValidationException(ErrorMessages.ROOM_CAPACITY_INVALID);
@@ -46,6 +61,11 @@ public class RoomController {
     }
 
     @GetMapping
+    @Operation(summary = "List rooms")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Validation failed")
+    })
     public PageResponse<RoomResponse> list(
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size) {

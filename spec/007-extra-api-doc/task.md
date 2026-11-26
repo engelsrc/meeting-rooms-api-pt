@@ -21,9 +21,10 @@ Extra OpenAPI/Swagger delgado; sin tests nuevos obligatorios; docs en `local` y 
   **Hecho cuando:** existe bean `OpenAPI` (p. ej. `OpenApiConfig`) con esquema HTTP Bearer JWT usable en Swagger UI («Authorize»); sin flujo OAuth2/password; sin documentar flujo login→token en código de este RF.  
   **Hecho:** 2026-11-26 — `OpenApiConfig` con `SecurityScheme` HTTP Bearer JWT (`bearer-jwt`).
 
-- [ ] **API-2** — Minimal operation coverage and error codes (RF-3, RF-5)  
+- [x] **API-2** — Minimal operation coverage and error codes (RF-3, RF-5)  
   **Título (EN):** `[docs] Annotate controllers error responses`  
-  **Hecho cuando:** en Swagger UI / `/v3/api-docs` aparecen al menos: `POST /api/auth/login`, `POST|GET /api/rooms`, `POST|GET /api/reservations`, `POST /api/reservations/cancel`; documentados de forma mínima códigos **400**, **401** y/o **403**, **409** donde aplique; sin ejemplos elaborados de body; sin operaciones inventadas.
+  **Hecho cuando:** en Swagger UI / `/v3/api-docs` aparecen al menos: `POST /api/auth/login`, `POST|GET /api/rooms`, `POST|GET /api/reservations`, `POST /api/reservations/cancel`; documentados de forma mínima códigos **400**, **401** y/o **403**, **409** donde aplique; sin ejemplos elaborados de body; sin operaciones inventadas.  
+  **Hecho:** 2026-11-26 — `@Tag`/`@ApiResponses` en Auth, Rooms, Reservations; Bearer en mutaciones.
 
 - [ ] **DOCS-2** — README Swagger UI URL (RF-4)  
   **Título (EN):** `[docs] README link to Swagger UI`  
