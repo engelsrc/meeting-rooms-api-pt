@@ -8,7 +8,7 @@ Repositorio: https://github.com/engelsrc/meeting-rooms-api-pt
 
 ### Requisitos
 
-- Java **17+** (probado también con JDK más reciente)
+- Java **17+**
 - Maven 3.9+
 
 ### Perfiles Spring
@@ -93,30 +93,31 @@ Suite mínima: 3 clases `@SpringBootTest` + MockMvc (`CreateRoomAuthTest`, `Rese
 
 ## Decisiones
 
-- **Stack:** Java 17+, Spring Boot 3.3, Maven; H2 + Flyway (migraciones V1–V4); JWT HS256 (no Basic).
-- **Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado:** entrypoints REST → handlers de command/query → dominio → adapters JPA; un solo módulo; sin event bus ni microservicios (límite ~3 h).
-- **Auth:** mutaciones (`POST` create/cancel) con Bearer; `GET` públicos; login `POST /api/auth/login`; seed `admin`/`admin` y `user`/`user`.
-- **Reservas:** intervalo **`[start, end)`**; solape con otra ACTIVE en la misma sala → **409**; validaciones → **400**; mensajes en inglés vía `ErrorMessages`.
-- **Listados:** salas y reservas paginados; reservas filtrables por `roomId` y `date`.
-- **Perfiles:** `local` y `prod` con secretos **demo** en YAML (no secretos reales de producción en el repo).
-- **Tests:** ≥3 integración MockMvc + H2 (`CreateRoomAuthTest`, `ReservationOverlapTest`, `ListRoomsPublicTest`); login HTTP real (no solo `@WithMockUser`).
-- **Proceso:** SDD por RF (`spec/00N-…`), una rama `feature/<carpeta>`, una Issue GitHub por RF, merge a `dev` al close.
+- **Stack:** Java 17+, Spring Boot 3.3 y Maven. Uso H2 con Flyway (migraciones V1 a V4) y autenticación con JWT HS256 en lugar de Basic.
+- **Arquitectura:** Clean Architecture (CA) con un Command Query Responsibility Segregation (CQRS) ligero. Las peticiones entran por los controladores REST, pasan a los handlers de comandos y consultas, luego al dominio y finalmente a los adaptadores JPA. Es un solo módulo, sin event bus ni microservicios, porque con unas 3 horas de plazo habría sido sobreingeniería.
+- **Autenticación:** Las operaciones que modifican datos (crear y cancelar) requieren token Bearer; los GET son públicos. El login es `POST /api/auth/login` y dejé dos usuarios de prueba: `admin`/`admin` y `user`/`user`.
+- **Reservas:** El intervalo es semiabierto `[inicio, fin)`, así que una reserva que termina a las 11:00 no choca con otra que empieza a las 11:00. Si una reserva se solapa con otra activa en la misma sala, devuelve **409**; si los datos no son válidos, **400**. Los mensajes de error están en inglés y centralizados en `ErrorMessages`.
+- **Listados:** Salas y reservas vienen paginadas, y las reservas se pueden filtrar por `roomId` y `date`.
+- **Perfiles:** `local` y `prod` usan secretos de demostración en el YAML. No hay secretos reales de producción en el repositorio.
+- **Tests:** Hay al menos tres tests de integración con MockMvc y H2: `CreateRoomAuthTest`, `ReservationOverlapTest` y `ListRoomsPublicTest`. Todos hacen login HTTP real en vez de apoyarse solo en `@WithMockUser`.
+- **Proceso:** Trabajé con SDD por requisito funcional (`spec/00N-…`): una rama `feature/<carpeta>` y una Issue de GitHub por cada RF, con merge a `dev` al cerrarla. Dentro de cada rama, hice un commit por cada task del requisito, de modo que el historial muestra el avance paso a paso y se puede revisar tarea por tarea.
 
 ## Qué haría con más tiempo
 
-1. **PostgreSQL real + Docker Compose** para `local`/`prod` (hoy ambos perfiles usan H2 demo).
-2. **Más tests:** cancelación, filtros de reservas, unique name → 409, casos borde de solape.
-3. **Hardening JWT:** secretos solo por env/secret manager; rotación; refresh tokens opcionales.
-4. **Observabilidad mínima:** health/metrics y logging estructurado de conflictos de reserva.
+1. **Pasar a PostgreSQL real con Docker Compose.** Hoy los perfiles `local` y `prod` usan una base H2 de demo; con más tiempo los levantaría sobre PostgreSQL para que el entorno se parezca a uno de producción.
+2. **Ampliar los tests hasta superar el 85 % de cobertura.** Agregaría pruebas para la cancelación de reservas, los filtros del listado, el 409 por nombre de sala duplicado y los casos borde del solape (por ejemplo, reservas que se tocan en el límite exacto de la hora). Mediría la cobertura con una herramienta como JaCoCo y la mantendría como criterio mínimo.
+3. **Reforzar la seguridad del JWT.** Los secretos vendrían solo de variables de entorno o de un gestor de secretos, nunca del repositorio. Además, implementaría rotación de claves y, opcionalmente, refresh tokens.
+4. **Sumar observabilidad básica.** Habilitaría Spring Boot Actuator para exponer health y métricas, y registraría con logging estructurado los conflictos de reserva, para poder detectarlos y analizarlos fácilmente.
+5. **Mejorar la documentación.** Completaría el README con ejemplos de uso de la API (peticiones y respuestas) y documentaría las clases con JavaDoc.
 
 ## Cómo usé la IA
 
 Hechos aportados por el autor de la prueba (formateados; sin ampliar):
 
-- **Organicé:** comandos Cursor (`ssd-cmd-*`), skills y constitución del proyecto para acotar el trabajo de la IA, acelerar el flujo SDD y mantener criterios consistentes.
-- **Pedí:** scaffolding SDD + API de salas con Clean Architecture (CA) / Command Query Responsibility Segregation (CQRS) y JWT.
-- **Acepté:** flujo por RF, H2 + Flyway, MockMvc con login real.
-- **Corregí:** renombrar clases `*IT` → `*Test`; autenticación en tests con Bearer vía login HTTP en lugar de basarse solo en `@WithMockUser`.
+- **Qué organicé:** Antes de pedirle código, preparé el entorno de trabajo de la IA: definí comandos de Cursor (`ssd-cmd-*`), skills y una constitución del proyecto. Con esto acoté lo que la IA podía hacer, aceleré el flujo SDD y mantuve criterios consistentes a lo largo de todo el desarrollo.
+- **Qué le pedí:** Le pedí que armara la estructura base del proyecto siguiendo un enfoque SDD (desarrollo guiado por especificaciones) y que construyera la API de reservas de salas con Clean Architecture (CA), separando comandos y consultas (Command Query Responsibility Segregation — CQRS), y con autenticación JWT.
+- **Qué acepté:** Acepté su propuesta de ir avanzando requisito por requisito (RF), usar H2 con Flyway para las migraciones, y escribir los tests de integración con MockMvc haciendo un login real.
+- **Qué corregí:** Cambié los nombres de las clases de test de `*IT` a `*Test`. También ajusté la autenticación en los tests: en lugar de depender solo de `@WithMockUser`, hago login por HTTP y uso el token Bearer en las peticiones, para que la prueba refleje mejor el flujo real.
 
 ## Tiempo
 
