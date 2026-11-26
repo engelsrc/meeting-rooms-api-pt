@@ -40,6 +40,13 @@ Documentación interactiva (Swagger UI): **`http://localhost:8080/swagger-ui/ind
 
 Usuario seed (migración V4): `admin` / `admin` (también existe `user` / `user`).
 
+### Extras (tiempo restante de la prueba)
+
+Con el tiempo restante de la prueba se incorporaron:
+
+- **Documentación de la API** (OpenAPI / Swagger UI en la URL anterior).
+- **Postman Collection:** `docs/postman/Meeting-Rooms-API.postman_collection.json` (importar en Postman; flujo feliz + un negativo representativo por endpoint).
+
 ## Endpoints
 
 | Método | Ruta | Auth |
