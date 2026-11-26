@@ -12,9 +12,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** existe `V3__create_reservations.sql` con `room_id` FK a `rooms`, `responsible`, `start_at`, `end_at`, `status`, auditoría RF 001, `cancelled_by`/`cancelled_at`; app arranca y Flyway aplica V3 sin romper V1/V2.  
   **Hecho:** 2026-11-26 — `V3__create_reservations.sql`; Flyway v3 OK al arrancar.
 
-- [ ] **MODEL-1** — Domain Reservation and ports (RF-1)  
+- [x] **MODEL-1** — Domain Reservation and ports (RF-1)  
   **Título (EN):** `[reservations] Domain model and ports`  
-  **Hecho cuando:** existen `Reservation`, `ReservationStatus` (ACTIVE/CANCELLED), `ReservationCommandPort` y `ReservationQueryPort` (save/find/overlap/lockRoom/list); sin lógica HTTP.
+  **Hecho cuando:** existen `Reservation`, `ReservationStatus` (ACTIVE/CANCELLED), `ReservationCommandPort` y `ReservationQueryPort` (save/find/overlap/lockRoom/list); sin lógica HTTP.  
+  **Hecho:** 2026-11-26 — dominio + puertos command/query.
 
 - [ ] **API-1** — ErrorMessages and NotFoundException (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] Error messages and NotFound`  
