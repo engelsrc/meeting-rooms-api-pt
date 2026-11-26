@@ -23,7 +23,7 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
   Sin rutas inventadas (register/refresh/etc.).  
   **Hecho:** 2026-11-26 — P1–P6 + scripts token/roomId/reservationId.
 
-- [ ] **DOCS-3** — Representative negative requests (RF-1)  
+- [x] **DOCS-3** — Representative negative requests (RF-1)  
   **Título (EN):** `[docs] Postman negative requests per endpoint`  
   **Hecho cuando:** hay exactamente **1** negativo representativo por cada uno de los 6 endpoints, segúnados al plan:  
   - Login password incorrecto → **401** (auth **no**).  
@@ -33,6 +33,7 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
   - `GET /api/reservations` `date=not-a-date` → **400** (auth **no**).  
   - `POST /api/reservations/cancel` id inexistente → **404** (auth **sí**).  
   Sin matriz amplia ni Environment aparte.
+  **Hecho:** 2026-11-26 — N1-N6 anadidos (401/403/400/409/400/404).
 
 - [ ] **DOCS-4** — README extras (API docs + Postman path) (RF-3)  
   **Título (EN):** `[docs] README extras API docs and Postman`  
