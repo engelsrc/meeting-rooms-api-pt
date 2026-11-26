@@ -21,9 +21,10 @@ Sin endpoints de salas/reservas; sin tablas de negocio.
   **Hecho cuando:** existen `application.yml` (default `spring.profiles.active=prod`), `application-local.yml` y `application-prod.yml`; ambos perfiles usan `jdbc:h2:mem:…` con el **mismo** nombre de BD; sin credenciales secretas reales; `ddl-auto` no crea esquema de negocio (`validate`/`none` o equivalente seguro).  
   **Hecho:** 2026-11-25 — default `prod`; H2 mem `meetingrooms` en local y prod; `ddl-auto=validate`.
 
-- [ ] **DB-4** — Add Flyway placeholder migration (RF-3)  
+- [x] **DB-4** — Add Flyway placeholder migration (RF-3)  
   **Título (EN):** `[persistence] Add Flyway placeholder migration`  
-  **Hecho cuando:** existe `src/main/resources/db/migration/V1__*.sql` con SQL mínimo **no** de negocio (p. ej. `schema_meta`); no existen tablas `rooms`/`reservations` en migraciones.
+  **Hecho cuando:** existe `src/main/resources/db/migration/V1__*.sql` con SQL mínimo **no** de negocio (p. ej. `schema_meta`); no existen tablas `rooms`/`reservations` en migraciones.  
+  **Hecho:** 2026-11-25 — `V1__schema_meta.sql` (tabla `schema_meta`); sin rooms/reservations.
 
 - [ ] **DB-5** — Create CA CQRS package skeleton (RF-4)  
   **Título (EN):** `[persistence] Create CA CQRS package skeleton`  
