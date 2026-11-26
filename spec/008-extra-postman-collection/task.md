@@ -11,7 +11,7 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
   **Hecho cuando:** existe `docs/postman/Meeting-Rooms-API.postman_collection.json` (Collection v2.1) con variables de colección `baseUrl`=`http://localhost:8080`, `token`, `roomId`, `reservationId`; sin `.postman_environment.json`; carpetas Auth / Rooms / Reservations presentes (pueden estar vacías de requests hasta DOCS-2/3).  
   **Hecho:** 2026-11-26 — scaffold v2.1 + variables + carpetas Auth/Rooms/Reservations.
 
-- [ ] **DOCS-2** — Happy-path requests and capture scripts (RF-1, RF-2)  
+- [x] **DOCS-2** — Happy-path requests and capture scripts (RF-1, RF-2)  
   **Título (EN):** `[docs] Postman positive requests and scripts`  
   **Hecho cuando:** la collection incluye los 6 positivos del plan:  
   - `POST /api/auth/login` body `{username,password}` seed `admin`/`admin` → script guarda `accessToken`→`token` (auth **no**).  
@@ -20,7 +20,8 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
   - `POST /api/reservations` Bearer + `roomId`/`startAt`/`endAt` → script `id`→`reservationId` (auth **sí**).  
   - `GET /api/reservations` con query `roomId`/`date`/`page`/`size` (auth **no**).  
   - `POST /api/reservations/cancel` Bearer + `{reservationId}` (auth **sí**).  
-  Sin rutas inventadas (register/refresh/etc.).
+  Sin rutas inventadas (register/refresh/etc.).  
+  **Hecho:** 2026-11-26 — P1–P6 + scripts token/roomId/reservationId.
 
 - [ ] **DOCS-3** — Representative negative requests (RF-1)  
   **Título (EN):** `[docs] Postman negative requests per endpoint`  
