@@ -3,9 +3,13 @@ target/
 .idea/
 *.iml
 .vscode/
+*.classpath
+*.project
+.settings/
 *.class
 *.jar
 *.war
+*.log
 
 # Env / secrets
 .env
