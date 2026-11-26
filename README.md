@@ -103,7 +103,11 @@ Suite mínima: 3 clases `@SpringBootTest` + MockMvc (`CreateRoomAuthTest`, `Rese
 
 ## Cómo usé la IA
 
-_(Placeholder — DOCS-4: bullets del humano; el agente solo formatea.)_
+Hechos aportados por el autor de la prueba (formateados; sin ampliar):
+
+- **Pedí:** scaffolding SDD + API de salas con Clean Architecture (CA) / Command Query Responsibility Segregation (CQRS) y JWT.
+- **Acepté:** flujo por RF, H2 + Flyway, MockMvc con login real.
+- **Corregí:** renombrar clases `*IT` → `*Test`; autenticación en tests con Bearer vía login HTTP en lugar de basarse solo en `@WithMockUser`.
 
 ## Tiempo
 

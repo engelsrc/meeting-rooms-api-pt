@@ -21,10 +21,11 @@ README raíz ES; bullets IA del humano; última task = Tiempo.
   **Hecho cuando:** sección decisiones alineada a `dev` (CA+CQRS delgado, H2/Flyway, JWT, solape 409, `ErrorMessages` EN); sección “más tiempo” con ≥3 ítems concretos; idioma español.  
   **Hecho:** 2026-11-26 — decisiones + 5 ítems “más tiempo”.
 
-- [ ] **DOCS-4** — Format IA bullets from human (RF-2)  
+- [x] **DOCS-4** — Format IA bullets from human (RF-2)  
   **Título (EN):** `[docs] Format human AI-usage bullets`  
   **Dependencia:** bullets del humano recibidos en el chat (sin ellos → no marcar hecha).  
-  **Hecho cuando:** sección “Cómo usé la IA” formatea solo esos bullets (qué pedí / acepté / corregí); agente no inventa hechos.
+  **Hecho cuando:** sección “Cómo usé la IA” formatea solo esos bullets (qué pedí / acepté / corregí); agente no inventa hechos.  
+  **Hecho:** 2026-11-26 — sección IA formateada desde bullets del humano.
 
 - [ ] **DOCS-5** — Update elapsed time (RF-3) — **última**  
   **Título (EN):** `[docs] Update README elapsed time`  
