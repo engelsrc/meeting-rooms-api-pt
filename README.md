@@ -113,6 +113,7 @@ Suite mínima: 3 clases `@SpringBootTest` + MockMvc (`CreateRoomAuthTest`, `Rese
 
 Hechos aportados por el autor de la prueba (formateados; sin ampliar):
 
+- **Organicé:** comandos Cursor (`ssd-cmd-*`), skills y constitución del proyecto para acotar el trabajo de la IA, acelerar el flujo SDD y mantener criterios consistentes.
 - **Pedí:** scaffolding SDD + API de salas con Clean Architecture (CA) / Command Query Responsibility Segregation (CQRS) y JWT.
 - **Acepté:** flujo por RF, H2 + Flyway, MockMvc con login real.
 - **Corregí:** renombrar clases `*IT` → `*Test`; autenticación en tests con Bearer vía login HTTP en lugar de basarse solo en `@WithMockUser`.
