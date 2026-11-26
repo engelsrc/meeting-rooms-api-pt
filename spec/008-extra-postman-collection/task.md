@@ -40,6 +40,7 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
   **Hecho cuando:** `README.md` menciona (cambio mínimo): acciones **extras** con el tiempo restante de la prueba; incorporación de **documentación de la API**; **Postman Collection** con ruta `docs/postman/Meeting-Rooms-API.postman_collection.json`; no reescribe secciones obligatorias §7 de RF 006.  
   **Hecho:** 2026-11-26 — seccion Extras en README (doc API + ruta Postman).
 
-- [ ] **DOCS-5** — Smoke happy path and all negatives (RF-4)  
+- [x] **DOCS-5** — Smoke happy path and all negatives (RF-4)  
   **Título (EN):** `[docs] Smoke Postman happy and negatives`  
-  **Hecho cuando:** con la app arrancada en localhost:8080, se ejecuta el orden del plan (P1→P2→P3→P4→**N4**→P5→P6→N1→N2→N3→N5→N6) obteniendo los HTTP esperados (2xx en feliz; 401/403/400/409/404 en negativos); evidencia breve (status codes) anotada al cerrar esta tarea / para review; sin Newman/CI.
+  **Hecho cuando:** con la app arrancada en localhost:8080, se ejecuta el orden del plan (P1→P2→P3→P4→**N4**→P5→P6→N1→N2→N3→N5→N6) obteniendo los HTTP esperados (2xx en feliz; 401/403/400/409/404 en negativos); evidencia breve (status codes) anotada al cerrar esta tarea / para review; sin Newman/CI.  
+  **Hecho:** 2026-11-26 — smoke localhost:8080 ALL_OK: P1 200, P2 201, P3 200, P4 201, N4 409, P5 200, P6 200, N1 401, N2 403, N3 400, N5 400, N6 404.
