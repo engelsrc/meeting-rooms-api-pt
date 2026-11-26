@@ -11,9 +11,10 @@ README raíz ES; bullets IA del humano; última task = Tiempo.
   **Hecho cuando:** existe `README.md` en la raíz con títulos: Cómo ejecutarlo, Endpoints, Flujo mínimo, Tests, Decisiones, Qué haría con más tiempo, Cómo usé la IA (placeholder), Tiempo (placeholder), Repo; sin inventar bullets IA ni duración final.  
   **Hecho:** 2026-11-26 — `README.md` con secciones placeholder.
 
-- [ ] **DOCS-2** — Runbook + endpoints + curl (RF-1)  
+- [x] **DOCS-2** — Runbook + endpoints + curl (RF-1)  
   **Título (EN):** `[docs] Document runbook endpoints and curl`  
-  **Hecho cuando:** sección ejecución con Java ≥17, Maven, perfiles `local`/`prod`, placeholders sin secretos reales, base `http://localhost:8080`; tabla de todos los endpoints (método, ruta, auth); flujo curl login `POST /api/auth/login` → `POST /api/rooms` (Bearer, 201) → `GET /api/rooms` (200, auth no); documentado `mvn test`.
+  **Hecho cuando:** sección ejecución con Java ≥17, Maven, perfiles `local`/`prod`, placeholders sin secretos reales, base `http://localhost:8080`; tabla de todos los endpoints (método, ruta, auth); flujo curl login `POST /api/auth/login` → `POST /api/rooms` (Bearer, 201) → `GET /api/rooms` (200, auth no); documentado `mvn test`.  
+  **Hecho:** 2026-11-26 — runbook + tabla + curl + tests en `README.md`.
 
 - [ ] **DOCS-3** — Decisions and future work (RF-2)  
   **Título (EN):** `[docs] Write decisions and more-time section`  
