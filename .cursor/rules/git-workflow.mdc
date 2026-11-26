@@ -1,0 +1,90 @@
+---
+description: >-
+  Fuente canónica de Git: ramas desde dev, commits por tarea en español,
+  merge+push origin/dev al cerrar cada RF (/ssd-cmd-close). PR manuales.
+alwaysApply: true
+---
+
+# Flujo Git — Prueba técnica (API de salas)
+
+**Fuente canónica de Git** de este repo.  
+Ciclo: `.cursor/rules/task-lifecycle.mdc`.  
+Constitución: `.cursor/agents/constitution.md`.
+
+**Un solo repositorio** (raíz del proyecto). Un único `.git`.
+
+## Política Git (por RF)
+
+| Momento | Qué hacer |
+|---------|-----------|
+| Cada **tarea** (`/ssd-cmd-implement`) | Commits en la **rama del RF** (`feature/<carpeta>`). **Sin** merge a `dev`. **Sin** push. |
+| Fin del **RF** (`/ssd-cmd-close`, tras review **cumple**) | Merge de esa rama a **`dev` local** → **`git push origin dev`** → **`git pull origin dev`** → **verificar** → crear `close.md` |
+
+**Pull requests:** manuales (humano). El agente **no** abre PR.
+
+## Regla principal — durante implementación
+
+1. Tarea pendiente en `spec/<carpeta>/task.md` (Lote 0 local; no GitHub Issues obligatorias)
+2. **Asegurar `dev`** — si no existe, crearla desde `main`/HEAD (solo con reloj arrancado o scaffold pedido)
+3. **Una rama por RF:** `feature/<carpeta>` desde `dev` (inglés). Reutilizarla en todas las tareas del RF
+4. **Implementar** + **commits** en esa rama (español, conventional commits)
+5. Siguiente tarea: misma rama; sin merge a `dev`
+6. **No** push ni merge a `dev` hasta `/ssd-cmd-close`
+
+## Regla principal — cierre de RF (`/ssd-cmd-close`)
+
+Orden fijo:
+
+1. Review `review-NNN.md` con veredicto **cumple**
+2. Commits finales en la **rama del RF**
+3. Merge de esa rama a **`dev` local** (no a `main`)
+4. **`git push origin dev`**
+5. **`git pull origin dev`**
+6. **Verificar** desarrollo en `dev`
+7. Escribir `spec/<carpeta>/close.md`
+
+Si no hay `origin`, documentar push pendiente; no fingir sync.
+
+## Modelo de ramas
+
+| Rama | Rol |
+|------|-----|
+| **`dev`** | Integración; destino del merge al cerrar el RF |
+| **`main`** | Estable / entrega (opcional); no features directo a `main` |
+| **`feature/<carpeta>`** | **Una por RF**; todas las tareas committean aquí |
+
+### Reglas
+
+1. Features desde `dev`, no desde `main` si ya existe `dev`.
+2. **Una rama por RF**, no por tarea.
+3. Nombres de rama en **inglés** (kebab-case).
+4. Commits: `<tipo>(<ámbito>): <descripción>` — descripción en **español**, imperativo, &lt; 50 caracteres.
+5. Sin secretos; varios commits por tarea OK; no un solo commit monstruoso al final.
+
+### Secuencia (RF)
+
+```text
+git checkout dev
+git checkout -b feature/<carpeta>   # una vez por RF
+# por cada tarea: commits en la misma rama (sin merge, sin push)
+
+# al close (tras /ssd-cmd-reviewer cumple):
+git checkout dev
+git merge feature/<carpeta>
+git push origin dev
+git pull origin dev
+# verificar → close.md
+```
+
+## Issues — Lote 0 local
+
+Estado en `spec/<carpeta>/task.md`. No exigir GitHub Issues.
+
+## Validaciones antes de dar por cerrado el RF
+
+- [ ] Review cumple
+- [ ] Merge en `dev` local hecho
+- [ ] `origin/dev` actualizado (o push pendiente documentado)
+- [ ] Verificación de que el código del RF está en `dev`
+- [ ] `close.md` creado
+- [ ] Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado; `ErrorMessages` EN

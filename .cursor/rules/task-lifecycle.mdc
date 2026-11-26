@@ -1,0 +1,113 @@
+---
+description: Ciclo de vida por RF — comandos SDD, AC, rama desde dev, implementación y cierre (API salas)
+alwaysApply: true
+---
+
+# Ciclo de tareas — Prueba técnica (API salas)
+
+Aplica junto a `.cursor/agents/constitution.md` y `.cursor/rules/git-workflow.mdc` (fuente canónica de Git).  
+Si chocan, **manda el enunciado vigente** de la constitución.
+
+**Issues:** Lote 0 **local** en `task.md` (no Linear, no GitHub Issues obligatorios).  
+**Repo:** un solo repositorio (esta prueba).  
+**Reloj:** no implementar la API hasta que el humano arranque el reloj.  
+**Comandos:** `.cursor/commands/ssd-cmd-*.md`. Auditoría: `.cursor/commands/INCONSISTENCIAS.md`.
+
+## Cadena SDD (commands)
+
+```text
+/ssd-cmd-create-rf
+  → /ssd-cmd-clarify → (/ssd-cmd-change si hay huecos)
+  → Estado: aprobada
+  → /ssd-cmd-plan → /ssd-cmd-task
+  → /ssd-cmd-implement (reloj arrancado; commits por tarea; sin merge/push)
+  → /ssd-cmd-reviewer → /ssd-cmd-close (merge dev local → push → pull → verificar → close.md)
+```
+
+Estado rápido: `/ssd-cmd-status spec/<carpeta>/rf.md`
+
+### Artefactos por carpeta
+
+```text
+spec/{NNN}-{slug}/
+  rf.md
+  plan.md
+  task.md
+  review-001.md   # …
+  close.md
+```
+
+## Flujo operativo por tarea (obligatorio)
+
+| Fase | Acción |
+|------|--------|
+| **0. RF→plan→tasks** | create-rf → clarify → aprobada → plan → task (Lote 0 local) |
+| **1. Elegir tarea** | Primera casilla pendiente en `task.md` con dependencias OK |
+| **2. Rama** | **Una por RF:** `feature/<carpeta>` desde `dev` (crear si no existe; reutilizar) |
+| **3. In progress** | Trabajar solo esa tarea en la rama del RF |
+| **4. Implementación** | CA + CQRS delgado; tests según «Hecho cuando»; perfiles `local`/`prod` si toca |
+| **5. Commits** | En la rama del RF; mensajes en **español**. **Sin** merge a `dev`. **Sin** push |
+| **6. Siguiente tarea** | Misma rama del RF; sin integrar aún |
+| **7. Review** | `/ssd-cmd-reviewer` cuando no queden tareas del RF |
+| **8. Cierre RF** | `/ssd-cmd-close`: merge **`dev` local** → push → pull → **verificar** → `close.md` |
+| **9. Siguiente RF** | Nueva carpeta `spec/00N-…` desde `dev` ya sync |
+
+**Reglas:**
+- Un RF = **una rama** `feature/<carpeta>` desde `dev`.
+- Varias tareas = varios **commits** en esa rama.
+- Nombres de rama en **inglés**; commits en **español**.
+- **PR** opcionales y **manuales**; el agente no abre PR.
+- Solo comandos `.cursor/commands/ssd-cmd-*.md` (no hay skills SDD).
+
+## 0. Al iniciar un RF (ANTES de codificar)
+
+1. RF: `spec/{NNN}-{slug}/rf.md` (`/ssd-cmd-create-rf`)
+2. Clarify / change hasta `Estado: aprobada`
+3. Plan: `plan.md` (`/ssd-cmd-plan`)
+4. Tareas: `task.md` (`/ssd-cmd-task`)
+5. Asegurar rama **`dev`** solo cuando el humano arranque el reloj (o pida scaffold)
+6. **No codificar** hasta reloj arrancado + tareas listas
+
+### Convención de carpetas
+
+- `NNN` = orden de entrega; `slug` = kebab-case inglés.
+- Orden típico de esta prueba: DB → salas → reservas → 409/400 → filtros → auth → tests → README.
+
+## 1. Criterios «Hecho cuando» (task.md)
+
+- Checkboxes **verificables**
+- HTTP: método, ruta, respuesta, auth sí/no
+- Listados: filtro + paginación si el enunciado lo pide
+- Una tarea = un entregable cohesionado
+
+### Título de rama / tarea (inglés)
+
+`[module] Short actionable title` — ej. `[reservations] Create reservation with overlap check`
+
+## 2. Al terminar (backend / close)
+
+1. Resumen en español
+2. Archivos principales
+3. Endpoint(s): método, ruta, auth
+4. Evidencia: tests / curl
+5. `/ssd-cmd-close`: merge `dev` + push + pull + verificar + `close.md`
+
+### Checklist
+
+- [ ] «Hecho cuando» de las tareas cumplido
+- [ ] Mensajes desde `ErrorMessages` (inglés)
+- [ ] CA + CQRS delgado respetado
+- [ ] Tests hacia el mínimo del enunciado (≥3, ≥1 integración)
+- [ ] `dev` remoto al día
+
+## Prohibido
+
+- Codificar con reloj parado o sin `task.md` / `dev`
+- Una rama por tarea (debe ser **una rama por RF**)
+- Rama desde `main` si ya existe `dev`
+- Commits con descripción en inglés (salvo tipo conventional)
+- Cerrar con review en no cumple
+- Literales de error; API messages en español
+- Event bus / CQRS “enterprise” en la ventana de 3 h
+- Crear GitHub Issues como gate del flujo
+- Usar rutas `specs/` (debe ser `spec/`) o constitución fuera de `.cursor/agents/constitution.md`
