@@ -11,9 +11,10 @@ Auth POST diferida a 006; `created_by=system`.
   **Hecho cuando:** `pom.xml` incluye `spring-boot-starter-web` (y validation si aplica); existe `V2__create_rooms.sql` con `rooms` (`name` UNIQUE, `capacity`, `location`, columnas auditoría RF 001); sin romper V1.  
   **Hecho:** 2026-11-25 — web+validation; `V2__create_rooms.sql`.
 
-- [ ] **MODEL-1** — Domain Room and ports (RF-1)  
+- [x] **MODEL-1** — Domain Room and ports (RF-1)  
   **Título (EN):** `[rooms] Add Room domain and ports`  
-  **Hecho cuando:** existe entidad de dominio `Room` y puertos de escritura/lectura bajo `domain`; sin dependencias de Spring/JPA en `domain`.
+  **Hecho cuando:** existe entidad de dominio `Room` y puertos de escritura/lectura bajo `domain`; sin dependencias de Spring/JPA en `domain`.  
+  **Hecho:** 2026-11-25 — `Room`, `RoomCommandPort`, `RoomQueryPort`.
 
 - [ ] **API-1** — ErrorMessages and app exceptions (RF-2, RF-3)  
   **Título (EN):** `[rooms] Add ErrorMessages and exceptions`  
