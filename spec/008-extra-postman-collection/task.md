@@ -25,19 +25,20 @@ Extra DX: Postman Collection v2.1 (6× positivo+negativo) + README extras + smok
 
 - [x] **DOCS-3** — Representative negative requests (RF-1)  
   **Título (EN):** `[docs] Postman negative requests per endpoint`  
-  **Hecho cuando:** hay exactamente **1** negativo representativo por cada uno de los 6 endpoints, segúnados al plan:  
+  **Hecho cuando:** hay exactamente **1** negativo representativo por cada uno de los 6 endpoints, alineados al plan:  
   - Login password incorrecto → **401** (auth **no**).  
   - `POST /api/rooms` sin Authorization → **403**.  
   - `GET /api/rooms` `page`/`size` inválidos → **400** (auth **no**).  
   - `POST /api/reservations` solape ACTIVE → **409** (auth **sí**; mismo intervalo que el positivo).  
   - `GET /api/reservations` `date=not-a-date` → **400** (auth **no**).  
   - `POST /api/reservations/cancel` id inexistente → **404** (auth **sí**).  
-  Sin matriz amplia ni Environment aparte.
+  Sin matriz amplia ni Environment aparte.  
   **Hecho:** 2026-11-26 — N1-N6 anadidos (401/403/400/409/400/404).
 
-- [ ] **DOCS-4** — README extras (API docs + Postman path) (RF-3)  
+- [x] **DOCS-4** — README extras (API docs + Postman path) (RF-3)  
   **Título (EN):** `[docs] README extras API docs and Postman`  
-  **Hecho cuando:** `README.md` menciona (cambio mínimo): acciones **extras** con el tiempo restante de la prueba; incorporación de **documentación de la API**; **Postman Collection** con ruta `docs/postman/Meeting-Rooms-API.postman_collection.json`; no reescribe secciones obligatorias §7 de RF 006.
+  **Hecho cuando:** `README.md` menciona (cambio mínimo): acciones **extras** con el tiempo restante de la prueba; incorporación de **documentación de la API**; **Postman Collection** con ruta `docs/postman/Meeting-Rooms-API.postman_collection.json`; no reescribe secciones obligatorias §7 de RF 006.  
+  **Hecho:** 2026-11-26 — seccion Extras en README (doc API + ruta Postman).
 
 - [ ] **DOCS-5** — Smoke happy path and all negatives (RF-4)  
   **Título (EN):** `[docs] Smoke Postman happy and negatives`  
