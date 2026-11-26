@@ -50,6 +50,7 @@ Zona fija: `America/Mexico_City`.
   - `POST /api/reservations/cancel` body `{ reservationId }` → **200** DTO; auth **no**; 404/409 según RF.  
   **Hecho:** 2026-11-26 — `ReservationController` POST/GET/cancel.
 
-- [ ] **API-7** — Smoke verify reservations flow (RF-2, RF-3, RF-4)  
+- [x] **API-7** — Smoke verify reservations flow (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] Smoke create list cancel overlap`  
-  **Hecho cuando:** evidenciado (curl/log): create 201; solape secuencial 409; extremo a extremo OK; list filtros/paginación; cancel 200 luego 409; create tras cancel en mismo hueco 201.
+  **Hecho cuando:** evidenciado (curl/log): create 201; solape secuencial 409; extremo a extremo OK; list filtros/paginación; cancel 200 luego 409; create tras cancel en mismo hueco 201.  
+  **Hecho:** 2026-11-26 — curl: create 201, overlap 409, adjacent 201, list 200, cancel 200/409, recreate 201.

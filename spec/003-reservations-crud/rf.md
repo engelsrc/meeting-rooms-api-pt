@@ -138,4 +138,4 @@ Exponer **solo** los endpoints que pide el enunciado para reservas: crear, lista
 - No existen `plan.md` / `task.md` en esta carpeta: se crearán tras aprobación del RF vía `/ssd-cmd-plan` y `/ssd-cmd-task`.
 
 ## Siguiente paso
-`Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/003-reservations-crud/rf.md`
+`Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/003-reservations-crud/rf.md`
