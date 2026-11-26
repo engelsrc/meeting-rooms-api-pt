@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ReservationOverlapIT {
+class ReservationOverlapTest {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -27,7 +27,7 @@ class ReservationOverlapIT {
     @Test
     void overlappingReservationReturns409() throws Exception {
         String token = AuthTestSupport.loginAdmin(mockMvc);
-        String roomName = "IT-Overlap-" + UUID.randomUUID();
+        String roomName = "Test-Overlap-" + UUID.randomUUID();
 
         String roomResponse = mockMvc.perform(post("/api/rooms")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)

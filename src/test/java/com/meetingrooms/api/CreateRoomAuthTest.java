@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class CreateRoomAuthIT {
+class CreateRoomAuthTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -24,7 +24,7 @@ class CreateRoomAuthIT {
     @Test
     void createRoomWithJwtReturns201() throws Exception {
         String token = AuthTestSupport.loginAdmin(mockMvc);
-        String name = "IT-Room-" + UUID.randomUUID();
+        String name = "Test-Room-" + UUID.randomUUID();
 
         mockMvc.perform(post("/api/rooms")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)

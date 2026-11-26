@@ -11,22 +11,22 @@ Rama: `feature/005-minimum-tests`
   **Hecho cuando:** existe helper que hace `POST /api/auth/login` con `admin`/`admin` vía MockMvc y devuelve `accessToken`; usable desde tests A/B.  
   **Hecho:** 2026-11-26 — `AuthTestSupport.loginAdmin`.
 
-- [x] **TEST-2** — CreateRoomAuthIT (RF-1)  
+- [x] **TEST-2** — CreateRoomAuthTest (RF-1)  
   **Título (EN):** `[tests] Create room 201 with JWT`  
   **Hecho cuando:** clase `@SpringBootTest` + `@AutoConfigureMockMvc`: login → `POST /api/rooms` con Bearer y body válido → **201**; nombre de sala único; auth sí (JWT).  
-  **Hecho:** 2026-11-26 — `CreateRoomAuthIT` pasa.
+  **Hecho:** 2026-11-26 — `CreateRoomAuthTest` pasa.
 
-- [x] **TEST-3** — ReservationOverlapIT (RF-1)  
+- [x] **TEST-3** — ReservationOverlapTest (RF-1)  
   **Título (EN):** `[tests] Reservation overlap returns 409`  
   **Hecho cuando:** clase distinta: login → create room → create reservation ACTIVE → segunda reservation solapada (mismo Bearer) → **409**; auth sí.  
-  **Hecho:** 2026-11-26 — `ReservationOverlapIT` pasa.
+  **Hecho:** 2026-11-26 — `ReservationOverlapTest` pasa.
 
-- [x] **TEST-4** — ListRoomsPublicIT (RF-1, RF-2)  
+- [x] **TEST-4** — ListRoomsPublicTest (RF-1, RF-2)  
   **Título (EN):** `[tests] List rooms 200 without auth`  
   **Hecho cuando:** clase distinta: `GET /api/rooms` sin Authorization → **200**; auth no.  
-  **Hecho:** 2026-11-26 — `ListRoomsPublicIT` pasa.
+  **Hecho:** 2026-11-26 — `ListRoomsPublicTest` pasa.
 
 - [x] **TEST-5** — Verify mvn test green (RF-1, RF-2)  
   **Título (EN):** `[tests] Run mvn test suite`  
   **Hecho cuando:** `mvn test` ejecuta las 3 clases y termina en éxito (exit 0); sin Testcontainers.  
-  **Hecho:** 2026-11-26 — `mvn test` exit 0 (3 IT + helper).
+  **Hecho:** 2026-11-26 — `mvn test` exit 0 (3 Test + helper).

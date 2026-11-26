@@ -26,9 +26,9 @@ Los tests ejercitan **entrypoints HTTP** (MockMvc); no duplican lógica de domin
 
 | Archivo | Responsabilidad | RF |
 |---------|-----------------|-----|
-| `src/test/java/.../CreateRoomAuthIT.java` (nombre orientativo) | Login + POST `/api/rooms` → 201 | RF-1 A |
-| `src/test/java/.../ReservationOverlapIT.java` | Login + room + 2 creates solapados → 409 | RF-1 B |
-| `src/test/java/.../ListRoomsPublicIT.java` | GET `/api/rooms` sin auth → 200 | RF-1 C |
+| `src/test/java/.../CreateRoomAuthTest.java` (nombre orientativo) | Login + POST `/api/rooms` → 201 | RF-1 A |
+| `src/test/java/.../ReservationOverlapTest.java` | Login + room + 2 creates solapados → 409 | RF-1 B |
+| `src/test/java/.../ListRoomsPublicTest.java` | GET `/api/rooms` sin auth → 200 | RF-1 C |
 | (opcional) `…/support/AuthTestSupport.java` | `loginAdmin(mockMvc)` → token | RF-1/2 |
 | `pom.xml` | Solo si falta dep de test (ya hay starter-test + security-test) | — |
 
