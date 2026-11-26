@@ -84,11 +84,22 @@ Suite mínima: 3 clases `@SpringBootTest` + MockMvc (`CreateRoomAuthTest`, `Rese
 
 ## Decisiones
 
-_(Pendiente — DOCS-3)_
+- **Stack:** Java 17+, Spring Boot 3.3, Maven; H2 + Flyway (migraciones V1–V4); JWT HS256 (no Basic).
+- **Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado:** entrypoints REST → handlers de command/query → dominio → adapters JPA; un solo módulo; sin event bus ni microservicios (límite ~3 h).
+- **Auth:** mutaciones (`POST` create/cancel) con Bearer; `GET` públicos; login `POST /api/auth/login`; seed `admin`/`admin` y `user`/`user`.
+- **Reservas:** intervalo **`[start, end)`**; solape con otra ACTIVE en la misma sala → **409**; validaciones → **400**; mensajes en inglés vía `ErrorMessages`.
+- **Listados:** salas y reservas paginados; reservas filtrables por `roomId` y `date`.
+- **Perfiles:** `local` y `prod` con secretos **demo** en YAML (no secretos reales de producción en el repo).
+- **Tests:** ≥3 integración MockMvc + H2 (`CreateRoomAuthTest`, `ReservationOverlapTest`, `ListRoomsPublicTest`); login HTTP real (no solo `@WithMockUser`).
+- **Proceso:** SDD por RF (`spec/00N-…`), una rama `feature/<carpeta>`, una Issue GitHub por RF, merge a `dev` al close.
 
 ## Qué haría con más tiempo
 
-_(Pendiente — DOCS-3)_
+1. **PostgreSQL real + Docker Compose** para `local`/`prod` (hoy ambos perfiles usan H2 demo).
+2. **OpenAPI/Swagger** generado y ejemplos de error 400/401/403/409.
+3. **Más tests:** cancelación, filtros de reservas, unique name → 409, casos borde de solape.
+4. **Hardening JWT:** secretos solo por env/secret manager; rotación; refresh tokens opcionales.
+5. **Observabilidad mínima:** health/metrics y logging estructurado de conflictos de reserva.
 
 ## Cómo usé la IA
 

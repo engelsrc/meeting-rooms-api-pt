@@ -16,9 +16,10 @@ README raíz ES; bullets IA del humano; última task = Tiempo.
   **Hecho cuando:** sección ejecución con Java ≥17, Maven, perfiles `local`/`prod`, placeholders sin secretos reales, base `http://localhost:8080`; tabla de todos los endpoints (método, ruta, auth); flujo curl login `POST /api/auth/login` → `POST /api/rooms` (Bearer, 201) → `GET /api/rooms` (200, auth no); documentado `mvn test`.  
   **Hecho:** 2026-11-26 — runbook + tabla + curl + tests en `README.md`.
 
-- [ ] **DOCS-3** — Decisions and future work (RF-2)  
+- [x] **DOCS-3** — Decisions and future work (RF-2)  
   **Título (EN):** `[docs] Write decisions and more-time section`  
-  **Hecho cuando:** sección decisiones alineada a `dev` (CA+CQRS delgado, H2/Flyway, JWT, solape 409, `ErrorMessages` EN); sección “más tiempo” con ≥3 ítems concretos; idioma español.
+  **Hecho cuando:** sección decisiones alineada a `dev` (CA+CQRS delgado, H2/Flyway, JWT, solape 409, `ErrorMessages` EN); sección “más tiempo” con ≥3 ítems concretos; idioma español.  
+  **Hecho:** 2026-11-26 — decisiones + 5 ítems “más tiempo”.
 
 - [ ] **DOCS-4** — Format IA bullets from human (RF-2)  
   **Título (EN):** `[docs] Format human AI-usage bullets`  
