@@ -2,120 +2,117 @@
 
 ## Metadatos
 - Carpeta: `spec/001-persistence-migration/`
-- RF origen: `rf.md` (`Estado: aprobada`)
+- RF origen: `rf.md` (`Estado: aprobada`; change auditoría RF-5)
 - Fecha: 2026-11-25
-- Rama de trabajo prevista: `feature/001-persistence-migration`
+- Rama de trabajo: `feature/001-persistence-migration`
 - Build: Maven — `com.meetingrooms` / `meeting-rooms-api`
+- Issue: #2 (open)
 
 ## Enfoque y orden
 
-Scaffold **DB + app base** (sin API de negocio). Orden:
+Scaffold **DB + app base** + **convención de auditoría**. Gran parte de RF-1…RF-4 ya está en la rama; el hueco del change es **RF-5**.
 
-1. Crear proyecto Maven Spring Boot (Java 17+) con coordenadas acordadas (**RF-1**).
-2. Dependencias: `spring-boot-starter-data-jpa`, H2, Flyway (**RF-3**).
-3. Perfiles `local` / `prod` + default `prod`; H2 mem mismo nombre de BD (**RF-2**).
-4. Migración Flyway placeholder (SQL mínimo no de negocio) (**RF-3**).
-5. Paquetes base CA + CQRS delgado + clase principal en bootstrap (**RF-4**, **RF-1**).
-6. Verificar arranque (perfil default `prod`; opcionalmente `local`).
+1. ~~Scaffold Maven Spring Boot~~ (**RF-1** — hecho en rama).
+2. ~~Dependencias JPA / H2 / Flyway~~ (**RF-3** — hecho).
+3. ~~Perfiles `local`/`prod`, H2 mem mismo nombre, default `prod`~~ (**RF-2** — hecho).
+4. ~~Paquetes CA + CQRS delgado~~ (**RF-4** — hecho).
+5. **Ajustar migración placeholder** para columnas de auditoría + soft delete en `schema_meta` (**RF-5**, impacta RF-3).
+6. **Re-verificar arranque** (`prod` y opcional `local`) con Flyway V1 actualizado (**RF-1/2/3/5**).
 
-Dependencias: RF-1 antes que RF-2/RF-3; RF-4 puede ir en paralelo al cableado de config.
+Estrategia H2 mem: **reescribir `V1__schema_meta.sql`** (no hace falta V2; no hay historial persistente entre reinicios). Documentar la misma lista de columnas para rooms/reservations futuros.
 
 ## Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado
 
-Paquetes bajo `com.meetingrooms` (o `com.meetingrooms.api` si el plan de paquetes lo agrupa; raíz = groupId):
+Paquetes bajo `com.meetingrooms` (ya creados con `package-info`):
 
-| Paquete | Rol en este RF |
-|---------|----------------|
-| `…domain.model` | Vacío / package-info; sin entidades de negocio aún |
-| `…application.command` | Vacío; listo para mutaciones |
-| `…application.query` | Vacío; listo para lecturas |
-| `…infrastructure.entrypoints` | Vacío; sin controllers de salas/reservas |
-| `…infrastructure.adapters` | Vacío; JPA adapters vendrán con tablas de negocio |
-| `…infrastructure.config` | Si hace falta beans mínimos; perfiles viven en YAML |
+| Paquete | Rol |
+|---------|-----|
+| `domain.model` | Futuras entidades; auditoría podrá vivir en mapped superclass / base más adelante |
+| `application.command` / `application.query` | Vacíos en este RF |
+| `infrastructure.entrypoints` | Sin controllers de negocio |
+| `infrastructure.adapters` | Persistencia futura |
+| `infrastructure.config` | YAML cubre perfiles |
 
-- Sin event bus, sin read DB separada, sin microservicios.
-- Command vs query: solo estructura; sin handlers todavía.
-- Regla de dependencia: entrypoints/adapters → application → model (no invertir).
+Sin event bus. En este RF la auditoría es **solo esquema SQL** (no AuditingEntityListener obligatorio aún).
+
+## Convención de auditoría (todas las tablas)
+
+Columnas obligatorias (RF-5):
+
+| Columna | Tipo | Notas |
+|--------|------|--------|
+| `created_by` | `VARCHAR(100) NOT NULL` | p. ej. seed `'system'` |
+| `created_at` | `TIMESTAMP NOT NULL` | default `CURRENT_TIMESTAMP` |
+| `updated_by` | `VARCHAR(100) NULL` | hasta primer update |
+| `updated_at` | `TIMESTAMP NULL` | hasta primer update |
+| `is_deleted` | `BOOLEAN NOT NULL DEFAULT FALSE` | soft delete |
+| `deleted_by` | `VARCHAR(100) NULL` | |
+| `deleted_at` | `TIMESTAMP NULL` | |
+
+Aplicable a `schema_meta` ahora y a **rooms** / **reservations** en RFs posteriores.
 
 ## Archivos a crear / modificar
 
-| Archivo / ruta | Responsabilidad | RF |
-|----------------|-----------------|-----|
-| `pom.xml` | Maven, Java 17+, starters JPA/H2/Flyway, Spring Boot parent | RF-1, RF-3 |
-| `src/main/java/…/MeetingRoomsApiApplication.java` (nombre exacto libre si coherente) | Bootstrap Spring Boot | RF-1 |
-| `src/main/java/…/domain/model/` | Paquete base | RF-4 |
-| `src/main/java/…/application/command/` | Paquete base | RF-4 |
-| `src/main/java/…/application/query/` | Paquete base | RF-4 |
-| `src/main/java/…/infrastructure/entrypoints/` | Paquete base | RF-4 |
-| `src/main/java/…/infrastructure/adapters/` | Paquete base | RF-4 |
-| `src/main/java/…/infrastructure/config/` | Paquete base | RF-4 |
-| `src/main/resources/application.yml` | Default `spring.profiles.active=prod`; shared no secreto | RF-2 |
-| `src/main/resources/application-local.yml` | Datasource H2 mem (mismo nombre) | RF-2 |
-| `src/main/resources/application-prod.yml` | Datasource H2 mem (mismo nombre) | RF-2 |
-| `src/main/resources/db/migration/V1__*.sql` | Placeholder SQL no de negocio (p. ej. `schema_meta`) | RF-3 |
-| `.gitignore` (raíz, si faltan entradas Java/Maven/IDE) | Evitar `target/`, `.idea`, etc. | RF-1 |
+| Archivo | Responsabilidad | RF | Estado |
+|---------|-----------------|-----|--------|
+| `pom.xml` | Maven, JPA, H2, Flyway | RF-1, RF-3 | Hecho |
+| `…/MeetingRoomsApiApplication.java` | Bootstrap | RF-1 | Hecho |
+| `application.yml` + `application-local.yml` + `application-prod.yml` | Perfiles H2 mem | RF-2 | Hecho |
+| Paquetes `domain` / `application` / `infrastructure` | Esqueleto CA | RF-4 | Hecho |
+| `db/migration/V1__schema_meta.sql` | Placeholder + **columnas auditoría** | RF-3, RF-5 | **Pendiente ajustar** |
 
-No crear: controllers REST de negocio, entidades Room/Reservation, security, Docker PostgreSQL, README de entrega.
-
-## Algoritmo / procedimiento (pseudocódigo)
+## Algoritmo / procedimiento (pendiente RF-5)
 
 ```text
-CREAR pom.xml (groupId=com.meetingrooms, artifactId=meeting-rooms-api, Java 17+)
-AÑADIR dependencias: data-jpa, h2, flyway-core (vía starter)
-CREAR Application main
-CREAR paquetes vacíos domain/application/infrastructure (RF-4)
-ESCRIBIR application.yml:
-  spring.profiles.active=prod
-  jpa.hibernate.ddl-auto=validate|none  # NO create/update de negocio
-ESCRIBIR application-local.yml y application-prod.yml:
-  spring.datasource.url=jdbc:h2:mem:<MISMO_NOMBRE>;DB_CLOSE_DELAY=-1;...
-  username/password demo no secretos reales
-ESCRIBIR V1__schema_meta.sql (o nombre equivalente):
-  CREATE TABLE schema_meta (...);  -- NO rooms/reservations
-ARRARCAR: mvn spring-boot:run  (perfil default prod)
-ASSERT: contexto OK + Flyway applied V1
-(OPCIONAL) ARRARCAR con -Dspring-boot.run.profiles=local → mismo resultado Flyway
+EDITAR V1__schema_meta.sql:
+  CREATE TABLE schema_meta (
+    id, meta_key, meta_value,
+    created_by VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(100) NULL,
+    updated_at TIMESTAMP NULL,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    deleted_by VARCHAR(100) NULL,
+    deleted_at TIMESTAMP NULL
+  );
+  INSERT ... VALUES (..., 'system', CURRENT_TIMESTAMP, NULL, NULL, FALSE, NULL, NULL);
+
+ARRARCAR: mvn -DskipTests spring-boot:run          # perfil prod
+ASSERT: Flyway V1 OK + Started MeetingRoomsApiApplication
+(OPCIONAL) ARRARCAR con profiles=local → mismo OK
 ```
 
 ## Mensajes de error (`ErrorMessages`)
 
-No aplica cuerpos HTTP de negocio en este RF.  
-Opcional diferido: crear clase vacía/stub `ErrorMessages` solo si no alarga el scaffold; **no obligatorio** aquí (RF lo difiere a APIs).
+No aplica HTTP de negocio en este RF.
 
 ## Perfiles `local` / `prod`
 
-| Perfil | Archivo | Datasource | Notas |
-|--------|---------|------------|--------|
-| `prod` (default) | `application-prod.yml` | H2 `jdbc:h2:mem:<mismo>` | Arranque sin flag extra |
-| `local` | `application-local.yml` | H2 `jdbc:h2:mem:<mismo>` | Activar con `spring.profiles.active=local` |
-
-Nombre de BD mem: un literal acordado en implementación (p. ej. `meetingrooms`); **idéntico** en ambos YAML.  
-Sin secretos de prod real; credenciales H2 de demo OK.
+Sin cambio respecto al plan anterior: H2 `jdbc:h2:mem:meetingrooms`; default `prod`; `ddl-auto=validate`.
 
 ## Estrategia de pruebas
 
-Este RF **no** es el de ≥3 tests del enunciado.  
-Verificación mínima: arranque + Flyway aplica V1 (manual o un smoke test solo si no desvía tiempo).  
-Los ≥3 tests / ≥1 integración quedan para el RF de tests.
+Verificación: arranque + Flyway aplica V1 con columnas de auditoría.  
+≥3 tests / integración → RF de tests posterior.
 
 ## Fuera de alcance
 
-- Tablas `rooms` / `reservations`
-- Endpoints REST, auth, filtros, 409/400 de negocio
+- Tablas rooms/reservations (heredarán la convención)
+- REST, auth, hard delete como política
 - PostgreSQL / Docker / Liquibase / Gradle
+- `@Entity` / `AuditingEntityListener` (opcional futuro; no gate de este RF)
 - README de entrega
-- Event bus / CQRS pesado
-- `ddl-auto=create|update` como sustituto de Flyway para esquema de negocio
 
 ## Trazabilidad RF → plan
 
 | Id | Cubierto por |
 |----|----------------|
-| RF-1 | `pom.xml` + Application + arranque |
-| RF-2 | `application*.yml` H2 mem mismo nombre; default `prod` |
-| RF-3 | JPA + Flyway + `V1__…` placeholder |
-| RF-4 | Paquetes domain / application / infrastructure |
+| RF-1 | Scaffold + arranque (re-verificar tras V1) |
+| RF-2 | `application*.yml` |
+| RF-3 | JPA + Flyway + V1 (con auditoría) |
+| RF-4 | Paquetes CA |
+| RF-5 | Columnas auditoría/soft delete en V1 + convención documentada |
 
 ## Próximo paso
 
-`/ssd-cmd-task` → `task.md` + **GitHub Issue open** del RF.
+`/ssd-cmd-task` → regenerar `task.md` (marcar hechas las ya cumplidas; dejar pendiente(s) de auditoría) + Issue #2 ya **open**.
