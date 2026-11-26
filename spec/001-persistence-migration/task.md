@@ -11,9 +11,10 @@ Sin endpoints de salas/reservas; sin tablas de negocio.
   **Hecho cuando:** existe el proyecto Java en la raíz del repo: `pom.xml` con `groupId=com.meetingrooms`, `artifactId=meeting-rooms-api`, Java 17+; estructura `src/main/java` y `src/main/resources`; clase `@SpringBootApplication` que compila; no hay secretos; `.gitignore` cubre `target/` e IDE si faltaba. (Dependencias JPA/H2/Flyway = DB-2.)  
   **Hecho:** 2026-11-25 — `pom.xml` + `MeetingRoomsApiApplication`; `mvn -DskipTests compile` OK; Issue #2 open.
 
-- [ ] **DB-2** — Add JPA H2 Flyway dependencies (RF-3)  
+- [x] **DB-2** — Add JPA H2 Flyway dependencies (RF-3)  
   **Título (EN):** `[persistence] Add JPA H2 Flyway dependencies`  
-  **Hecho cuando:** `pom.xml` incluye Spring Data JPA, H2 y Flyway (starters Spring Boot); el proyecto resuelve dependencias (`mvn dependency:resolve` o build OK).
+  **Hecho cuando:** `pom.xml` incluye Spring Data JPA, H2 y Flyway (starters Spring Boot); el proyecto resuelve dependencias (`mvn dependency:resolve` o build OK).  
+  **Hecho:** 2026-11-25 — `spring-boot-starter-data-jpa`, `h2`, `flyway-core`; `mvn dependency:resolve compile` OK.
 
 - [ ] **DB-3** — Configure local and prod H2 profiles (RF-2)  
   **Título (EN):** `[persistence] Configure local prod H2 mem profiles`  
