@@ -21,9 +21,10 @@ Rama: `feature/005-minimum-tests`
   **Hecho cuando:** clase distinta: login → create room → create reservation ACTIVE → segunda reservation solapada (mismo Bearer) → **409**; auth sí.  
   **Hecho:** 2026-11-26 — `ReservationOverlapIT` pasa.
 
-- [ ] **TEST-4** — ListRoomsPublicIT (RF-1, RF-2)  
+- [x] **TEST-4** — ListRoomsPublicIT (RF-1, RF-2)  
   **Título (EN):** `[tests] List rooms 200 without auth`  
-  **Hecho cuando:** clase distinta: `GET /api/rooms` sin Authorization → **200**; auth no.
+  **Hecho cuando:** clase distinta: `GET /api/rooms` sin Authorization → **200**; auth no.  
+  **Hecho:** 2026-11-26 — `ListRoomsPublicIT` pasa.
 
 - [ ] **TEST-5** — Verify mvn test green (RF-1, RF-2)  
   **Título (EN):** `[tests] Run mvn test suite`  
