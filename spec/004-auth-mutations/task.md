@@ -16,9 +16,10 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** existen modelo User mínimo, `UserQueryPort.findByUsername` (case-sensitive), JPA entity/repo/adapter; sin HTTP.  
   **Hecho:** 2026-11-26 — User + UserQueryPort + JPA adapter.
 
-- [ ] **SEC-1** — JwtService and ErrorMessages auth (RF-2, RF-3)  
+- [x] **SEC-1** — JwtService and ErrorMessages auth (RF-2, RF-3)  
   **Título (EN):** `[auth] JwtService and ErrorMessages`  
-  **Hecho cuando:** `JwtService` emite/valida HS256 (`sub`=username, TTL 1h, secret desde config); `ErrorMessages` tiene constantes EN para user not found, invalid password, unauthenticated 403, invalid token 401, login validation; YAML local/prod con `app.jwt.secret` y expiration 3600000.
+  **Hecho cuando:** `JwtService` emite/valida HS256 (`sub`=username, TTL 1h, secret desde config); `ErrorMessages` tiene constantes EN para user not found, invalid password, unauthenticated 403, invalid token 401, login validation; YAML local/prod con `app.jwt.secret` y expiration 3600000.  
+  **Hecho:** 2026-11-26 — JwtService + ErrorMessages AUTH_* + YAML.
 
 - [ ] **SEC-2** — Security filter chain and JWT filter (RF-3)  
   **Título (EN):** `[auth] SecurityConfig and Jwt filter`  

@@ -7,3 +7,8 @@ spring:
   h2:
     console:
       enabled: true
+
+app:
+  jwt:
+    secret: "local-demo-jwt-secret-key-32chars!!"
+    expiration-ms: 3600000

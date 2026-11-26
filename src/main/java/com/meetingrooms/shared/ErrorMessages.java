@@ -20,6 +20,13 @@ public final class ErrorMessages {
     public static final String INVALID_RESERVATION_DATE = "Date must be a valid ISO date (yyyy-MM-dd)";
     public static final String INVALID_LIST_ROOM_ID = "Room id does not exist";
 
+    public static final String AUTH_USERNAME_REQUIRED = "Username is required";
+    public static final String AUTH_PASSWORD_REQUIRED = "Password is required";
+    public static final String AUTH_USER_NOT_FOUND = "User not found";
+    public static final String AUTH_INVALID_PASSWORD = "Invalid password";
+    public static final String AUTH_UNAUTHENTICATED = "Authentication required";
+    public static final String AUTH_INVALID_TOKEN = "Invalid or expired token";
+
     private ErrorMessages() {
     }
 }
