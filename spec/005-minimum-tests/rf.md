@@ -86,4 +86,4 @@ Añadir **≥3 tests** con **`@SpringBootTest` + MockMvc + H2** (sin Testcontain
 - No existen aún; crear tras APROBADO.
 
 ## Siguiente paso
-`Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/005-minimum-tests/rf.md`
+`Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/005-minimum-tests/rf.md`

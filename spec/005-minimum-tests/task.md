@@ -26,6 +26,7 @@ Rama: `feature/005-minimum-tests`
   **Hecho cuando:** clase distinta: `GET /api/rooms` sin Authorization → **200**; auth no.  
   **Hecho:** 2026-11-26 — `ListRoomsPublicIT` pasa.
 
-- [ ] **TEST-5** — Verify mvn test green (RF-1, RF-2)  
+- [x] **TEST-5** — Verify mvn test green (RF-1, RF-2)  
   **Título (EN):** `[tests] Run mvn test suite`  
-  **Hecho cuando:** `mvn test` ejecuta las 3 clases y termina en éxito (exit 0); sin Testcontainers.
+  **Hecho cuando:** `mvn test` ejecuta las 3 clases y termina en éxito (exit 0); sin Testcontainers.  
+  **Hecho:** 2026-11-26 — `mvn test` exit 0 (3 IT + helper).
