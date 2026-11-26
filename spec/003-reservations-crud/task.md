@@ -37,9 +37,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** handler con `reservationId`: inexistente → 404; ya CANCELLED → 409; ACTIVE → CANCELLED + `cancelled_by='system'` + `cancelled_at`; no muta soft-delete.  
   **Hecho:** 2026-11-26 — `CancelReservationHandler`.
 
-- [ ] **API-5** — ListReservations query (RF-3)  
+- [x] **API-5** — ListReservations query (RF-3)  
   **Título (EN):** `[reservations] List reservations query`  
-  **Hecho cuando:** query aplica `roomId`/`date` (día `startAt` en `America/Mexico_City`)/`page`/`size` (defaults 0/20); inválidos y `size>100` → 400; `roomId` sala inexistente → 400; resultado paginado ordenado.
+  **Hecho cuando:** query aplica `roomId`/`date` (día `startAt` en `America/Mexico_City`)/`page`/`size` (defaults 0/20); inválidos y `size>100` → 400; `roomId` sala inexistente → 400; resultado paginado ordenado.  
+  **Hecho:** 2026-11-26 — `ListReservationsHandler` zona MX.
 
 - [ ] **API-6** — REST create list cancel (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] REST create list cancel`  
