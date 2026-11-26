@@ -16,25 +16,30 @@ Auth POST diferida a 006; `created_by=system`.
   **Hecho cuando:** existe entidad de dominio `Room` y puertos de escritura/lectura bajo `domain`; sin dependencias de Spring/JPA en `domain`.  
   **Hecho:** 2026-11-25 — `Room`, `RoomCommandPort`, `RoomQueryPort`.
 
-- [ ] **API-1** — ErrorMessages and app exceptions (RF-2, RF-3)  
+- [x] **API-1** — ErrorMessages and app exceptions (RF-2, RF-3)  
   **Título (EN):** `[rooms] Add ErrorMessages and exceptions`  
-  **Hecho cuando:** existe clase `ErrorMessages` (EN) con constantes de validación/409/paginación; excepciones de aplicación mapeables a 400/409; sin literales de mensaje en handlers futuros.
+  **Hecho cuando:** existe clase `ErrorMessages` (EN) con constantes de validación/409/paginación; excepciones de aplicación mapeables a 400/409; sin literales de mensaje en handlers futuros.  
+  **Hecho:** 2026-11-25 — `ErrorMessages`, `ValidationException`, `ConflictException`.
 
-- [ ] **API-2** — CreateRoom command and handler (RF-2)  
+- [x] **API-2** — CreateRoom command and handler (RF-2)  
   **Título (EN):** `[rooms] Implement CreateRoom command`  
-  **Hecho cuando:** `CreateRoomCommand` + handler validan reglas (name, capacity, location, unicidad global); setean `created_by=system`; usan puertos; sin REST todavía o con wire mínimo si el adaptador ya existe — preferible command completo listo para entrypoint.
+  **Hecho cuando:** `CreateRoomCommand` + handler validan reglas (name, capacity, location, unicidad global); setean `created_by=system`; usan puertos; sin REST todavía o con wire mínimo si el adaptador ya existe — preferible command completo listo para entrypoint.  
+  **Hecho:** 2026-11-25 — `CreateRoomCommand` + `CreateRoomHandler`.
 
-- [ ] **API-3** — ListRooms query and handler (RF-3)  
+- [x] **API-3** — ListRooms query and handler (RF-3)  
   **Título (EN):** `[rooms] Implement ListRooms query`  
-  **Hecho cuando:** query/handler con `page`/`size` (default 0/20); rechaza inválidos; filtra `is_deleted=false`; devuelve items + total.
+  **Hecho cuando:** query/handler con `page`/`size` (default 0/20); rechaza inválidos; filtra `is_deleted=false`; devuelve items + total.  
+  **Hecho:** 2026-11-25 — `ListRoomsQuery` + `ListRoomsHandler` + `ListRoomsResult`.
 
-- [ ] **API-4** — JPA adapter for rooms (RF-1, RF-2, RF-3)  
+- [x] **API-4** — JPA adapter for rooms (RF-1, RF-2, RF-3)  
   **Título (EN):** `[rooms] Implement JPA rooms adapter`  
-  **Hecho cuando:** entity/repo/adapter JPA implementan los puertos; unicidad global vía UNIQUE o check; soft-delete respetado en list.
+  **Hecho cuando:** entity/repo/adapter JPA implementan los puertos; unicidad global vía UNIQUE o check; soft-delete respetado en list.  
+  **Hecho:** 2026-11-25 — `RoomJpaEntity`, repo, `RoomPersistenceAdapter`.
 
-- [ ] **API-5** — REST POST and GET /api/rooms (RF-2, RF-3)  
+- [x] **API-5** — REST POST and GET /api/rooms (RF-2, RF-3)  
   **Título (EN):** `[rooms] Expose POST GET api rooms`  
-  **Hecho cuando:** `POST /api/rooms` → **201** + `{id,name,capacity,location}` (auth: no); `GET /api/rooms?page=&size=` → **200** `{items,page,size,total}` (auth: no); 400/409 vía advice + `ErrorMessages`; lista vacía 200.
+  **Hecho cuando:** `POST /api/rooms` → **201** + `{id,name,capacity,location}` (auth: no); `GET /api/rooms?page=&size=` → **200** `{items,page,size,total}` (auth: no); 400/409 vía advice + `ErrorMessages`; lista vacía 200.  
+  **Hecho:** 2026-11-25 — `RoomController` + `RestExceptionHandler`.
 
 - [ ] **API-6** — Smoke verify create and list (RF-2, RF-3)  
   **Título (EN):** `[rooms] Smoke verify create and list`  
