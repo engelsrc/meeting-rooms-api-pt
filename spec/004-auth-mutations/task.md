@@ -11,9 +11,10 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** `pom.xml` incluye `spring-boot-starter-security` + JWT (jjwt); existe `V4__create_users.sql` con `id`, `username` UNIQUE, `password` (BCrypt); seed `admin`/`admin` y `user`/`user`; app arranca y Flyway aplica V4.  
   **Hecho:** 2026-11-26 — security+jjwt en pom; V4 users seed; Flyway v4 OK.
 
-- [ ] **MODEL-1** — User domain and query port (RF-1)  
+- [x] **MODEL-1** — User domain and query port (RF-1)  
   **Título (EN):** `[auth] User domain and query port`  
-  **Hecho cuando:** existen modelo User mínimo, `UserQueryPort.findByUsername` (case-sensitive), JPA entity/repo/adapter; sin HTTP.
+  **Hecho cuando:** existen modelo User mínimo, `UserQueryPort.findByUsername` (case-sensitive), JPA entity/repo/adapter; sin HTTP.  
+  **Hecho:** 2026-11-26 — User + UserQueryPort + JPA adapter.
 
 - [ ] **SEC-1** — JwtService and ErrorMessages auth (RF-2, RF-3)  
   **Título (EN):** `[auth] JwtService and ErrorMessages`  
