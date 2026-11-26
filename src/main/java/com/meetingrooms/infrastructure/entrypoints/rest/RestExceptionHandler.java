@@ -3,6 +3,7 @@ package com.meetingrooms.infrastructure.entrypoints.rest;
 import com.meetingrooms.application.ConflictException;
 import com.meetingrooms.application.ValidationException;
 import com.meetingrooms.shared.ErrorMessages;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -20,6 +21,12 @@ public class RestExceptionHandler {
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<ErrorResponse> handleConflict(ConflictException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessageKey()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(ErrorMessages.ROOM_NAME_ALREADY_EXISTS));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

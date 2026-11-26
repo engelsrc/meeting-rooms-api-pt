@@ -7,7 +7,7 @@ Estado: aprobada
 - Slug: `rooms-create-list`
 - Orden: `002`
 - Tipo: `API` | `Model` | `DB`
-- Origen: change tras clarify + AskQuestions (auth diferida, paginación, unicidad, location)
+- Origen: change — mapear unique violation concurrente a 409
 - Fecha: 2026-11-25
 - GitHub Issue: #3 — https://github.com/engelsrc/meeting-rooms-api-pt/issues/3
 
@@ -66,7 +66,8 @@ Exponer **crear sala** y **listar salas** (paginado, solo no borradas) vía REST
 - [ ] `created_by` persistido como `'system'` (hasta 006).
 - [ ] `location` omitido o JSON `null` → columna `null`; `location: ""` se guarda como string vacío; con texto → ese valor.
 - [ ] `name` vacío/blank, `name` > 100, `capacity` ≤ 0, `location` > 255 → **400** vía `ErrorMessages`.
-- [ ] Nombre ya existente (aunque soft-deleted) → **409** vía `ErrorMessages`.
+- [ ] Nombre ya existente (aunque soft-deleted) → **409** vía `ErrorMessages` (check previo y/o restricción UNIQUE).
+- [ ] Si la persistencia falla por violación de unicidad de `name` (p. ej. carrera concurrente / `DataIntegrityViolation`), **EL SISTEMA** responde **409** con `ErrorMessages.ROOM_NAME_ALREADY_EXISTS` (no 500).
 - [ ] Respuesta **201** solo con `id`, `name`, `capacity`, `location` (sin campos de auditoría en el DTO).
 - [ ] Mutación vía **command** (CQRS delgado); entrypoint sin lógica de negocio.
 
@@ -95,7 +96,7 @@ Exponer **crear sala** y **listar salas** (paginado, solo no borradas) vía REST
 - `page`/`size` inválidos → 400 (no coerción).
 - Soft-deleted: no en list; **no** se puede reusar el mismo `name` (único global).
 - POST sin auth; `created_by='system'`.
-- Concurrencia mismo `name`: uno gana; el otro 409 (o error de restricción mapeado a 409).
+- Concurrencia mismo `name`: uno gana; el otro **409** mapeando la violación UNIQUE/`DataIntegrityViolation` a `ErrorMessages.ROOM_NAME_ALREADY_EXISTS`.
 
 ## Restricciones heredadas
 - Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado; sin event bus.
@@ -105,7 +106,7 @@ Exponer **crear sala** y **listar salas** (paginado, solo no borradas) vía REST
 - Una GitHub Issue **open** antes de implementar; cierre en `/ssd-cmd-close`.
 
 ## Preguntas abiertas
-- Ninguna tras AskQuestions del change.
+- Ninguna (opción A AskQuestions: mapear DataIntegrityViolation → 409).
 
 ## Siguiente paso
-`Próxima acción: CREAR EL PLAN, ejecutar /ssd-cmd-plan spec/002-rooms-create-list/rf.md`
+`Próxima acción: RECREAR EL PLAN, ejecutar /ssd-cmd-plan spec/002-rooms-create-list/rf.md`
