@@ -36,6 +36,7 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** create room usa `created_by`=username del SecurityContext; create reservation `created_by`+`responsible`=username; cancel `cancelled_by`=username; ya no `'system'` en mutaciones autenticadas.  
   **Hecho:** 2026-11-26 — actorUsername en commands/handlers.
 
-- [ ] **API-3** — Smoke verify JWT auth flow (RF-2, RF-3, RF-4)  
+- [x] **API-3** — Smoke verify JWT auth flow (RF-2, RF-3, RF-4)  
   **Título (EN):** `[auth] Smoke login protect and identity`  
-  **Hecho cuando:** evidenciado: login 200 + token; GET rooms/reservations sin token 200; POST mutación sin token 403; Bearer inválido 401; POST con token 201/200 y username en created_by/responsible/cancelled_by.
+  **Hecho cuando:** evidenciado: login 200 + token; GET rooms/reservations sin token 200; POST mutación sin token 403; Bearer inválido 401; POST con token 201/200 y username en created_by/responsible/cancelled_by.  
+  **Hecho:** 2026-11-26 — curl: login 200, GET 200, POST 403/401/201, responsible=admin, cancel 200, login errores 401.

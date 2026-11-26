@@ -118,4 +118,4 @@ Introducir **JWT** (HS256, TTL 1 h): login, usuarios en BD, proteger mutaciones;
 - No existen `plan.md` / `task.md`: se crearán tras APROBADO vía `/ssd-cmd-plan` y `/ssd-cmd-task`.
 
 ## Siguiente paso
-`Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/004-auth-mutations/rf.md`
+`Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/004-auth-mutations/rf.md`
