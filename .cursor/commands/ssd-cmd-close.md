@@ -29,8 +29,8 @@ Política Git: **una rama por RF**; commits por tarea en esa rama. La integraci�
 5. **`git pull origin dev`** (local alineado con remoto).
 6. **Verificar** que el desarrollo del RF está en `dev` (p. ej. `git log` / archivos clave / tests rápidos si aplica). Si no, detente y dilo; **no** crees `close.md`.
 7. Si no hay `origin`, documenta push pendiente y no fingas sync remoto.
-8. **No** es obligatorio cerrar GitHub Issues (Lote 0 local).
-9. Solo entonces crea `spec/<carpeta>/close.md` (español): cierre, número del review, veredicto cumple, ramas/commits, evidencia de sync `dev`. Resume en el chat.
+8. **Cierra también la Issue en GitHub** (`gh issue close <N>` → estado **closed**), con comentario breve: review cumple + merge a `dev`. Obligatoria: el close del RF no está completo si la Issue sigue open. Si no hay Issue anotada, documenta el bloqueo (no finjas el cierre).
+9. Solo entonces crea `spec/<carpeta>/close.md` (español): cierre, número del review, veredicto cumple, ramas/commits, Issue `#N` **closed**, evidencia de sync `dev`. Resume en el chat.
 
 ## Al terminar
 

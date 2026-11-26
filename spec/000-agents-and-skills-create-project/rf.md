@@ -9,6 +9,7 @@ Estado: aprobada
 - Tipo: `Meta` | `Git` | `Comando`
 - Origen: change tras clarify; reconstrucción del alcance meta
 - Fecha: 2026-11-25
+- GitHub Issue: #1 — https://github.com/engelsrc/meeting-rooms-api-pt/issues/1
 
 ## Problema / oportunidad
 
@@ -37,7 +38,6 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 - Scaffold Spring Boot / código de la API (va en `001`…).
 - Crear o restaurar **skills** SDD: si no existen, no se crean; el flujo es **comandos**. Si en el futuro aparecen skills, no son gate de este RF.
 - Abrir PR automáticamente.
-- GitHub Issues obligatorias (Lote 0 = `task.md`).
 - Crear carpetas `spec/001-…` … `008-…` en este RF.
 - Empezar RF `001` antes de que este `000` tenga `close.md`.
 
@@ -106,7 +106,7 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 - Reutilizar artefactos existentes; no duplicar constitución/comandos “desde cero” si ya cumplen.
 - Repo GitHub: público, nombre fijo `meeting-rooms-api-pt`, dueño = cuenta personal.
 - Una rama de trabajo por este RF; integración a `dev` solo en close.
-- Lote 0 local en `task.md`.
+- Una GitHub Issue por este RF; detalle de tareas en `task.md`.
 
 ## Casos límite
 - Si `PRUEBA-INICIO.md` se borra: recrearlo antes de cualquier `/ssd-cmd-implement` de API.

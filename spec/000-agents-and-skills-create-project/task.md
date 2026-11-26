@@ -1,6 +1,7 @@
 # Tareas — 000 agents-and-skills-create-project
 
-Lote 0 local. Rama de trabajo: `feature/000-agents-and-skills-create-project` (tras existir `dev`).  
+GitHub Issue: #1 — https://github.com/engelsrc/meeting-rooms-api-pt/issues/1  
+Rama de trabajo: `feature/000-agents-and-skills-create-project` (tras existir `dev`).  
 Sin Spring Boot / API en este RF.
 
 ## Tareas

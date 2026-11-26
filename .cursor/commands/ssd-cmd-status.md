@@ -16,15 +16,18 @@ Dice en pocas líneas dónde está un RF. No modifiques ningún archivo. No haga
 
 1. Fase del flujo y estado del RF.
 2. Tareas hechas y pendientes (x de y). Si no hay `task.md`, dilo.
-3. Si el reloj de la prueba ha arrancado o no (según lo que diga el humano / constitución).
-4. Próxima acción, una sola línea:
+3. GitHub Issue del RF (`#N` / URL / **open** | **closed** | faltante).
+4. Si el reloj de la prueba ha arrancado o no (según lo que diga el humano / constitución).
+5. Próxima acción, una sola línea:
 
 - sin `rf.md`: `Próxima acción: CREAR EL RF, ejecutar /ssd-cmd-create-rf`;
 - con preguntas abiertas o datos pendientes: `Próxima acción: REVISAR EL RF, ejecutar /ssd-cmd-clarify spec/<carpeta>/rf.md`;
 - `Estado: borrador` y sin preguntas abiertas: `Próxima acción: APROBAR EL RF. Cambiar la línea a Estado: aprobada en spec/<carpeta>/rf.md.`;
 - `Estado: aprobada` y `plan.md`/`task.md` obsoletos o sin `plan.md`: `Próxima acción: CREAR/RECREAR EL PLAN, ejecutar /ssd-cmd-plan spec/<carpeta>/rf.md`;
 - con plan vigente y sin `task.md` (o `task.md` obsoleto): `Próxima acción: CREAR LAS TAREAS, ejecutar /ssd-cmd-task spec/<carpeta>/rf.md`;
-- con tareas pendientes (y reloj arrancado): `Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/<carpeta>/rf.md`;
+- con `task.md` vigente y sin Issue **open**: `Próxima acción: CREAR LA ISSUE DEL RF EN ESTADO OPEN (regla de /ssd-cmd-task) y anotarla en rf.md / task.md`;
+- con tareas pendientes, Issue **open** y reloj arrancado: `Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/<carpeta>/rf.md`;
+- con tareas pendientes y Issue faltante/closed: no implementar; primero dejar la Issue en **open**;
 - con tareas pendientes y reloj parado: `Próxima acción: ESPERAR ARRANQUE DEL RELOJ (humano) antes de /ssd-cmd-implement`;
 - tareas hechas y sin review que cumpla: `Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/<carpeta>/rf.md`;
 - review cumple y sin `close.md`: `Próxima acción: INTEGRAR Y CERRAR, ejecutar /ssd-cmd-close spec/<carpeta>/rf.md`;

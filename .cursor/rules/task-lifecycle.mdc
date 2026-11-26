@@ -8,7 +8,7 @@ alwaysApply: true
 Aplica junto a `.cursor/agents/constitution.md` y `.cursor/rules/git-workflow.mdc` (fuente canónica de Git).  
 Si chocan, **manda el enunciado vigente** de la constitución.
 
-**Issues:** Lote 0 **local** en `task.md` (no Linear, no GitHub Issues obligatorios).  
+**Issues:** **una GitHub Issue por RF** — creada en `/ssd-cmd-task` en estado **open** (obligatoria **antes** de implementar); cerrada en GitHub en `/ssd-cmd-close`. El desglose vive en `task.md`.  
 **Repo:** un solo repositorio (esta prueba).  
 **Reloj:** no implementar la API hasta que el humano arranque el reloj.  
 **Comandos:** `.cursor/commands/ssd-cmd-*.md`. Auditoría: `.cursor/commands/INCONSISTENCIAS.md`.
@@ -19,9 +19,9 @@ Si chocan, **manda el enunciado vigente** de la constitución.
 /ssd-cmd-create-rf
   → /ssd-cmd-clarify → (/ssd-cmd-change si hay huecos)
   → Estado: aprobada
-  → /ssd-cmd-plan → /ssd-cmd-task
-  → /ssd-cmd-implement (reloj arrancado; commits por tarea; sin merge/push)
-  → /ssd-cmd-reviewer → /ssd-cmd-close (merge dev local → push → pull → verificar → close.md)
+  → /ssd-cmd-plan → /ssd-cmd-task (+ crear Issue GitHub **open**)
+  → /ssd-cmd-implement (Issue open; reloj arrancado; commits por tarea; sin merge/push)
+  → /ssd-cmd-reviewer → /ssd-cmd-close (merge dev → push → pull → verificar → Issue **closed** → close.md)
 ```
 
 Estado rápido: `/ssd-cmd-status spec/<carpeta>/rf.md`
@@ -30,7 +30,7 @@ Estado rápido: `/ssd-cmd-status spec/<carpeta>/rf.md`
 
 ```text
 spec/{NNN}-{slug}/
-  rf.md
+  rf.md          # incluye GitHub Issue: #N
   plan.md
   task.md
   review-001.md   # …
@@ -41,7 +41,7 @@ spec/{NNN}-{slug}/
 
 | Fase | Acción |
 |------|--------|
-| **0. RF→plan→tasks** | create-rf → clarify → aprobada → plan → task (Lote 0 local) |
+| **0. RF→plan→tasks** | create-rf → clarify → aprobada → plan → task (+ **1 Issue GitHub open**) |
 | **1. Elegir tarea** | Primera casilla pendiente en `task.md` con dependencias OK |
 | **2. Rama** | **Una por RF:** `feature/<carpeta>` desde `dev` (crear si no existe; reutilizar) |
 | **3. In progress** | Trabajar solo esa tarea en la rama del RF |
@@ -49,12 +49,12 @@ spec/{NNN}-{slug}/
 | **5. Commits** | En la rama del RF; mensajes en **español**. **Sin** merge a `dev`. **Sin** push |
 | **6. Siguiente tarea** | Misma rama del RF; sin integrar aún |
 | **7. Review** | `/ssd-cmd-reviewer` cuando no queden tareas del RF |
-| **8. Cierre RF** | `/ssd-cmd-close`: merge **`dev` local** → push → pull → **verificar** → `close.md` |
+| **8. Cierre RF** | `/ssd-cmd-close`: merge **`dev` local** → push → pull → **verificar** → **cerrar Issue en GitHub (closed)** → `close.md` |
 | **9. Siguiente RF** | Nueva carpeta `spec/00N-…` desde `dev` ya sync |
 
 **Reglas:**
-- Un RF = **una rama** `feature/<carpeta>` desde `dev`.
-- Varias tareas = varios **commits** en esa rama.
+- Un RF = **una rama** `feature/<carpeta>` desde `dev` = **una GitHub Issue**.
+- Varias tareas = varios **commits** en esa rama (no una Issue por tarea).
 - Nombres de rama en **inglés**; commits en **español**.
 - **PR** opcionales y **manuales**; el agente no abre PR.
 - Solo comandos `.cursor/commands/ssd-cmd-*.md` (no hay skills SDD).
@@ -64,9 +64,9 @@ spec/{NNN}-{slug}/
 1. RF: `spec/{NNN}-{slug}/rf.md` (`/ssd-cmd-create-rf`)
 2. Clarify / change hasta `Estado: aprobada`
 3. Plan: `plan.md` (`/ssd-cmd-plan`)
-4. Tareas: `task.md` (`/ssd-cmd-task`)
+4. Tareas + Issue **open**: `task.md` y GitHub Issue del RF (`/ssd-cmd-task`)
 5. Asegurar rama **`dev`** solo cuando el humano arranque el reloj (o pida scaffold)
-6. **No codificar** hasta reloj arrancado + tareas listas
+6. **No codificar** hasta reloj arrancado + tareas listas + Issue del RF en estado **open**
 
 ### Convención de carpetas
 
@@ -99,15 +99,16 @@ spec/{NNN}-{slug}/
 - [ ] CA + CQRS delgado respetado
 - [ ] Tests hacia el mínimo del enunciado (≥3, ≥1 integración)
 - [ ] `dev` remoto al día
+- [ ] Issue del RF cerrada en GitHub
 
 ## Prohibido
 
-- Codificar con reloj parado o sin `task.md` / `dev`
+- Codificar con reloj parado o sin `task.md` / `dev` / Issue del RF
 - Una rama por tarea (debe ser **una rama por RF**)
+- Una Issue por tarea (debe ser **una Issue por RF**)
 - Rama desde `main` si ya existe `dev`
 - Commits con descripción en inglés (salvo tipo conventional)
 - Cerrar con review en no cumple
 - Literales de error; API messages en español
 - Event bus / CQRS “enterprise” en la ventana de 3 h
-- Crear GitHub Issues como gate del flujo
 - Usar rutas `specs/` (debe ser `spec/`) o constitución fuera de `.cursor/agents/constitution.md`

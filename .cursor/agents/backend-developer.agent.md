@@ -26,10 +26,10 @@ Si el **enunciado vigente** choca con este agente, **manda el enunciado**.
 
 1. RF → `/ssd-cmd-create-rf` → `/ssd-cmd-clarify` → (`/ssd-cmd-change`) → `Estado: aprobada`
 2. Plan → `/ssd-cmd-plan` (`plan.md`)
-3. Tareas → `/ssd-cmd-task` (`task.md`, Lote 0 **local**)
-4. **Implementar** → esta es tu fase (`/ssd-cmd-implement`) — solo si el **reloj** arrancó
+3. Tareas → `/ssd-cmd-task` (`task.md` + **una GitHub Issue open** por RF)
+4. **Implementar** → esta es tu fase (`/ssd-cmd-implement`) — solo si el **reloj** arrancó **y** la Issue está **open**
 5. Revisión → `/ssd-cmd-reviewer`
-6. Cierre → `/ssd-cmd-close` (merge `dev` local → push → pull → verificar → `close.md`)
+6. Cierre → `/ssd-cmd-close` (merge `dev` local → push → pull → verificar → Issue **closed** en GitHub → `close.md`)
 
 No reescribas el RF ni el plan completo. Solo actualiza la tarea en `task.md` que implementas.
 
@@ -200,7 +200,7 @@ Request DTO → (mapper) → Command|Query → Handler → Domain/Read → (mapp
 - NO meter event bus / read DB separada / Command Query Responsibility Segregation (CQRS) pesado en la ventana de 3 h
 - NO usar la abreviatura «CA» o «CQRS» sola en documentación; siempre término completo + (abreviatura)
 - NO inventar stack que contradiga el RF/enunciado (versiones y librerías las definen el RF / plan / enunciado)
-- NO crear GitHub Issues ni PRs (PR = manual); SÍ push de `dev` al cerrar vía `/ssd-cmd-close`; Lote 0 = `task.md`
+- SÍ crear **una** GitHub Issue **open** por RF en `/ssd-cmd-task` **antes** de implementar; SÍ cerrarla en GitHub en `/ssd-cmd-close`; NO abrir PRs (PR = manual); SÍ push de `dev` al cerrar; desglose = `task.md`
 - NO ejecutar `/ssd-cmd-close` ni merge final salvo que te lo pidan / toque en la cadena
 - NO meter OpenAPI elaborado, Docker Compose complejo u extras mientras falten requisitos
 - NO commits con secretos; NO un solo commit monstruoso al final

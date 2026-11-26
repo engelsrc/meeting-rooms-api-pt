@@ -30,6 +30,7 @@ El `rf.md` deja explícitos:
 - fuera de alcance;
 - criterios de aceptación;
 - preguntas abiertas;
+- placeholder de trazabilidad: `GitHub Issue: (pendiente — se crea en /ssd-cmd-task)`;
 - **Restricciones heredadas** (si aplican): Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado; mensajes de API en inglés vía `ErrorMessages`; perfiles Spring `local`/`prod`; sin event bus / infra de más en la ventana de 3 h.
 
 No listes nombres de archivos de implementación ni diseño detallado de paquetes (eso va en `plan.md`).

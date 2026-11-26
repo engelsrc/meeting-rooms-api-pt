@@ -16,7 +16,7 @@ Implementa **una** sola tarea pendiente. No crees tareas nuevas ni amplíes el p
 5. Si `dev` no existe: créala desde `main`/HEAD **solo** si el humano ya arrancó el reloj o pidió scaffold/kickoff; si no, detente y dilo.
 6. **Una rama por RF** (carpeta): `feature/<carpeta>` o `feature/<slug>` desde `dev` (inglés). Si la rama del RF ya existe, úsala; no crees una rama por tarea. Si no está claro `feature/` vs `fix/`, pregunta y espera.
 7. Toma la primera tarea pendiente de `task.md` (orden del plan). Si no queda ninguna, detente.
-8. **No** crees GitHub Issues (Lote 0 local). El estado vive en `task.md`.
+8. **Issue del RF (gate):** debe existir `GitHub Issue: #N` en `rf.md`/`task.md` y estar **open** en GitHub **antes** de cualquier cambio de código. Si falta, créala primero (`gh issue create`, estado open) y anótala; si está closed, detente. No crees una Issue por tarea. Sin Issue **open** → no implementes.
 
 ## Ejecución
 
