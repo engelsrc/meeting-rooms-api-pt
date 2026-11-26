@@ -15,8 +15,6 @@ target/
 .env
 .env.*
 !.env.example
-**/application-prod.yml
-!**/application-prod.yml.example
 
 # OS
 Thumbs.db

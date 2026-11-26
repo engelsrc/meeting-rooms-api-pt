@@ -16,9 +16,10 @@ Sin endpoints de salas/reservas; sin tablas de negocio.
   **Hecho cuando:** `pom.xml` incluye Spring Data JPA, H2 y Flyway (starters Spring Boot); el proyecto resuelve dependencias (`mvn dependency:resolve` o build OK).  
   **Hecho:** 2026-11-25 — `spring-boot-starter-data-jpa`, `h2`, `flyway-core`; `mvn dependency:resolve compile` OK.
 
-- [ ] **DB-3** — Configure local and prod H2 profiles (RF-2)  
+- [x] **DB-3** — Configure local and prod H2 profiles (RF-2)  
   **Título (EN):** `[persistence] Configure local prod H2 mem profiles`  
-  **Hecho cuando:** existen `application.yml` (default `spring.profiles.active=prod`), `application-local.yml` y `application-prod.yml`; ambos perfiles usan `jdbc:h2:mem:…` con el **mismo** nombre de BD; sin credenciales secretas reales; `ddl-auto` no crea esquema de negocio (`validate`/`none` o equivalente seguro).
+  **Hecho cuando:** existen `application.yml` (default `spring.profiles.active=prod`), `application-local.yml` y `application-prod.yml`; ambos perfiles usan `jdbc:h2:mem:…` con el **mismo** nombre de BD; sin credenciales secretas reales; `ddl-auto` no crea esquema de negocio (`validate`/`none` o equivalente seguro).  
+  **Hecho:** 2026-11-25 — default `prod`; H2 mem `meetingrooms` en local y prod; `ddl-auto=validate`.
 
 - [ ] **DB-4** — Add Flyway placeholder migration (RF-3)  
   **Título (EN):** `[persistence] Add Flyway placeholder migration`  
