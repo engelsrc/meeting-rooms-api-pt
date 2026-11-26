@@ -41,9 +41,10 @@ Auth POST diferida a 006; `created_by=system`.
   **Hecho cuando:** `POST /api/rooms` → **201** + `{id,name,capacity,location}` (auth: no); `GET /api/rooms?page=&size=` → **200** `{items,page,size,total}` (auth: no); 400/409 vía advice + `ErrorMessages`; lista vacía 200.  
   **Hecho:** 2026-11-25 — `RoomController` + `RestExceptionHandler`.
 
-- [ ] **API-6** — Smoke verify create and list (RF-2, RF-3)  
+- [x] **API-6** — Smoke verify create and list (RF-2, RF-3)  
   **Título (EN):** `[rooms] Smoke verify create and list`  
-  **Hecho cuando:** app arranca; evidencia de POST 201, GET 200 (vacío o con datos), al menos un 400 o 409 según smoke; documentado en la casilla.
+  **Hecho cuando:** app arranca; evidencia de POST 201, GET 200 (vacío o con datos), al menos un 400 o 409 según smoke; documentado en la casilla.  
+  **Hecho:** 2026-11-25 — GET vacío 200; POST Alpha 201; duplicado 409; name vacío 400; GET con 1 item 200.
 
 ## Notas
 - Una Issue por RF; commits por tarea; sin merge/push hasta close.
