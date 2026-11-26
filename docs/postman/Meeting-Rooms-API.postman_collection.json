@@ -1,0 +1,28 @@
+{
+  "info": {
+    "_postman_id": "a8e00800-0008-4000-8000-meetingroomsapi",
+    "name": "Meeting Rooms API",
+    "description": "Postman Collection v2.1 for Meeting Rooms API (RF 008). Happy path + one representative negative per endpoint.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
+    { "key": "roomId", "value": "" },
+    { "key": "reservationId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": []
+    },
+    {
+      "name": "Rooms",
+      "item": []
+    },
+    {
+      "name": "Reservations",
+      "item": []
+    }
+  ]
+}
