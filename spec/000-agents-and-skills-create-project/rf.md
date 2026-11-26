@@ -32,7 +32,7 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 - Comprobar que el trabajo parte de la rama **`main`**.
 - Crear la rama **`dev`** desde `main` y dejar `origin` configurado (`main` y `dev` en remoto según el flujo acordado).
 - Marcador de reloj: `PRUEBA-INICIO.md` en la raíz (evidencia de t0).
-- Documentar el mapa de RF de producto `001`…`008` (solo orden; **no** crear esas carpetas en este RF).
+- Documentar el mapa de RF de producto (solo orden; **no** crear esas carpetas en este RF). Actualizado tras 003: solape/filtros absorbidos; numeración realineada.
 
 ### Excluye
 - Scaffold Spring Boot / código de la API (va en `001`…).
@@ -93,7 +93,8 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 
 #### Criterios de aceptación
 - [ ] Queda explícito: **no** abrir `001`…`008` hasta `close.md` de este `000`.
-- [ ] El mapa de orden de producto queda documentado: `001-persistence-migrations` → `002-rooms-create-list` → `003-reservations-crud` → `004-overlap-409-validation-400` → `005-reservations-filters-pagination` → `006-auth-mutations` → `007-minimum-tests` → `008-delivery-readme`.
+- [x] El mapa de orden de producto queda documentado (vigente): `001-persistence-migration` → `002-rooms-create-list` → `003-reservations-crud` → `004-auth-mutations` → `005-minimum-tests` → `006-delivery-readme`.  
+  Nota: los antiguos `004-overlap…` / `005-filters…` / ex-`006` auth se absorbieron en 003 o se renumeraron; no hay carpetas huérfanas 004–005 del mapa viejo.
 
 ### RF-7 — Cadena SDD de este meta
 **EL SISTEMA** trata este `000` con la misma cadena: plan → task → implement (commits en `feature/000-agents-and-skills-create-project`) → reviewer → close (merge a `dev` local → push → pull → verificar).
