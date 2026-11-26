@@ -31,9 +31,10 @@ Sin endpoints de salas/reservas; sin tablas de negocio.
   **Hecho cuando:** existen paquetes `domain.model`, `application.command`, `application.query`, `infrastructure.entrypoints`, `infrastructure.adapters`, `infrastructure.config` bajo el base package; no hay controllers REST de salas/reservas.  
   **Hecho:** 2026-11-25 — `package-info.java` en los 6 paquetes; sin controllers de negocio.
 
-- [ ] **DB-6** — Verify app starts with Flyway (RF-1, RF-2, RF-3)  
+- [x] **DB-6** — Verify app starts with Flyway (RF-1, RF-2, RF-3)  
   **Título (EN):** `[persistence] Verify app starts with Flyway`  
-  **Hecho cuando:** la app arranca con perfil default `prod` sin error de contexto; Flyway aplica V1; opcionalmente se verifica arranque con `local`; evidencia en consola/logs o comando documentado en la casilla al marcar.
+  **Hecho cuando:** la app arranca con perfil default `prod` sin error de contexto; Flyway aplica V1; opcionalmente se verifica arranque con `local`; evidencia en consola/logs o comando documentado en la casilla al marcar.  
+  **Hecho:** 2026-11-25 — `mvn -DskipTests spring-boot:run`: perfil `prod` + Flyway V1 OK; `… -Dspring-boot.run.profiles=local` OK. SQL V1 ajustado (`meta_key`/`meta_value`; `key` reservado en H2).
 
 ## Notas
 - Prefijos: `DB` = persistencia/scaffold.
