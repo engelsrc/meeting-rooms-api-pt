@@ -109,4 +109,4 @@ Exponer **crear sala** y **listar salas** (paginado, solo no borradas) vía REST
 - Ninguna (opción A AskQuestions: mapear DataIntegrityViolation → 409).
 
 ## Siguiente paso
-`Próxima acción: RECREAR EL PLAN, ejecutar /ssd-cmd-plan spec/002-rooms-create-list/rf.md`
+`Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/002-rooms-create-list/rf.md`
