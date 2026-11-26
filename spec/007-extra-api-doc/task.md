@@ -11,9 +11,10 @@ Extra OpenAPI/Swagger delgado; sin tests nuevos obligatorios; docs en `local` y 
   **Hecho cuando:** `pom.xml` incluye `springdoc-openapi-starter-webmvc-ui` con versión compatible Spring Boot 3.3.5 (p. ej. 2.6.x); el proyecto resuelve la dependencia (`mvn -q dependency:resolve` o arranque OK).  
   **Hecho:** 2026-11-26 — `springdoc.version=2.6.0`; `dependency:resolve` OK.
 
-- [ ] **SEC-1** — Public doc routes in Security (RF-2)  
+- [x] **SEC-1** — Public doc routes in Security (RF-2)  
   **Título (EN):** `[security] PermitAll swagger and api-docs`  
-  **Hecho cuando:** `SecurityConfig` declara `permitAll` para `/swagger-ui/**`, `/swagger-ui/index.html` (si aplica) y `/v3/api-docs` (y `/v3/api-docs/**` si hace falta); mutaciones `/api/**` siguen con JWT; GET `/api/**` y `POST /api/auth/login` siguen públicos. Auth docs: no. Auth mutaciones: sí.
+  **Hecho cuando:** `SecurityConfig` declara `permitAll` para `/swagger-ui/**`, `/swagger-ui/index.html` (si aplica) y `/v3/api-docs` (y `/v3/api-docs/**` si hace falta); mutaciones `/api/**` siguen con JWT; GET `/api/**` y `POST /api/auth/login` siguen públicos. Auth docs: no. Auth mutaciones: sí.  
+  **Hecho:** 2026-11-26 — `permitAll` explícito para swagger-ui y v3/api-docs; reglas `/api/**` intactas.
 
 - [ ] **API-1** — OpenAPI Bearer JWT scheme (RF-2)  
   **Título (EN):** `[docs] OpenAPI bearer JWT security scheme`  
