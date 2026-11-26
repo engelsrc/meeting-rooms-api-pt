@@ -21,9 +21,10 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** `JwtService` emite/valida HS256 (`sub`=username, TTL 1h, secret desde config); `ErrorMessages` tiene constantes EN para user not found, invalid password, unauthenticated 403, invalid token 401, login validation; YAML local/prod con `app.jwt.secret` y expiration 3600000.  
   **Hecho:** 2026-11-26 — JwtService + ErrorMessages AUTH_* + YAML.
 
-- [ ] **SEC-2** — Security filter chain and JWT filter (RF-3)  
+- [x] **SEC-2** — Security filter chain and JWT filter (RF-3)  
   **Título (EN):** `[auth] SecurityConfig and Jwt filter`  
-  **Hecho cuando:** GET `/api/**` y `POST /api/auth/login` permitAll; resto `/api/**` autenticado; sin header / Bearer vacío / scheme ≠ Bearer → **403**; JWT inválido/expirado → **401** con `ErrorMessages`; CSRF off; session STATELESS.
+  **Hecho cuando:** GET `/api/**` y `POST /api/auth/login` permitAll; resto `/api/**` autenticado; sin header / Bearer vacío / scheme ≠ Bearer → **403**; JWT inválido/expirado → **401** con `ErrorMessages`; CSRF off; session STATELESS.  
+  **Hecho:** 2026-11-26 — SecurityConfig + JwtAuthenticationFilter.
 
 - [ ] **API-1** — Login command and POST /api/auth/login (RF-2)  
   **Título (EN):** `[auth] Login endpoint`  
