@@ -37,7 +37,11 @@ public class RoomController {
             throw new ValidationException(ErrorMessages.ROOM_CAPACITY_INVALID);
         }
         Room room = createRoomHandler.handle(
-                new CreateRoomCommand(request.name(), request.capacity(), request.location()));
+                new CreateRoomCommand(
+                        request.name(),
+                        request.capacity(),
+                        request.location(),
+                        CurrentUser.requireUsername()));
         return ResponseEntity.status(HttpStatus.CREATED).body(RoomMapper.toResponse(room));
     }
 

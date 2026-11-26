@@ -16,8 +16,6 @@ import java.time.Instant;
 @Service
 public class CreateReservationHandler {
 
-    private static final String SYSTEM_USER = "system";
-
     private final ReservationCommandPort reservationCommandPort;
 
     public CreateReservationHandler(ReservationCommandPort reservationCommandPort) {
@@ -43,14 +41,15 @@ public class CreateReservationHandler {
             throw new ConflictException(ErrorMessages.RESERVATION_OVERLAP);
         }
 
+        String actor = command.actorUsername();
         Reservation reservation = new Reservation(
                 command.roomId(),
-                SYSTEM_USER,
+                actor,
                 command.startAt(),
                 command.endAt(),
                 ReservationStatus.ACTIVE
         );
-        reservation.setCreatedBy(SYSTEM_USER);
+        reservation.setCreatedBy(actor);
         reservation.setCreatedAt(Instant.now());
         reservation.setDeleted(false);
         return reservationCommandPort.save(reservation);

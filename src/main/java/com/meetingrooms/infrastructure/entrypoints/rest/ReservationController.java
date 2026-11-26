@@ -46,7 +46,11 @@ public class ReservationController {
             throw new ValidationException(ErrorMessages.VALIDATION_FAILED);
         }
         Reservation reservation = createReservationHandler.handle(
-                new CreateReservationCommand(request.roomId(), request.startAt(), request.endAt()));
+                new CreateReservationCommand(
+                        request.roomId(),
+                        request.startAt(),
+                        request.endAt(),
+                        CurrentUser.requireUsername()));
         return ResponseEntity.status(HttpStatus.CREATED).body(ReservationMapper.toResponse(reservation));
     }
 
@@ -69,7 +73,7 @@ public class ReservationController {
             throw new NotFoundException(ErrorMessages.RESERVATION_NOT_FOUND);
         }
         Reservation reservation = cancelReservationHandler.handle(
-                new CancelReservationCommand(request.reservationId()));
+                new CancelReservationCommand(request.reservationId(), CurrentUser.requireUsername()));
         return ReservationMapper.toResponse(reservation);
     }
 }

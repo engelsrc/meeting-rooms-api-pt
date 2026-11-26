@@ -31,9 +31,10 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** `POST /api/auth/login` body `{ username, password }` → **200** `{ accessToken }` (auth **no**); blank/ausente → **400**; JSON malo → **400**; user inexistente → **401** mensaje distinto; password malo → **401** mensaje distinto; vía command/handler.  
   **Hecho:** 2026-11-26 — AuthController + LoginHandler.
 
-- [ ] **API-2** — Wire identity into room and reservation mutations (RF-4)  
+- [x] **API-2** — Wire identity into room and reservation mutations (RF-4)  
   **Título (EN):** `[auth] Propagate username to audit fields`  
-  **Hecho cuando:** create room usa `created_by`=username del SecurityContext; create reservation `created_by`+`responsible`=username; cancel `cancelled_by`=username; ya no `'system'` en mutaciones autenticadas.
+  **Hecho cuando:** create room usa `created_by`=username del SecurityContext; create reservation `created_by`+`responsible`=username; cancel `cancelled_by`=username; ya no `'system'` en mutaciones autenticadas.  
+  **Hecho:** 2026-11-26 — actorUsername en commands/handlers.
 
 - [ ] **API-3** — Smoke verify JWT auth flow (RF-2, RF-3, RF-4)  
   **Título (EN):** `[auth] Smoke login protect and identity`  

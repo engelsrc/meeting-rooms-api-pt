@@ -14,8 +14,6 @@ import java.time.Instant;
 @Service
 public class CancelReservationHandler {
 
-    private static final String SYSTEM_USER = "system";
-
     private final ReservationCommandPort reservationCommandPort;
 
     public CancelReservationHandler(ReservationCommandPort reservationCommandPort) {
@@ -35,10 +33,11 @@ public class CancelReservationHandler {
             throw new ConflictException(ErrorMessages.RESERVATION_ALREADY_CANCELLED);
         }
 
+        String actor = command.actorUsername();
         reservation.setStatus(ReservationStatus.CANCELLED);
-        reservation.setCancelledBy(SYSTEM_USER);
+        reservation.setCancelledBy(actor);
         reservation.setCancelledAt(Instant.now());
-        reservation.setUpdatedBy(SYSTEM_USER);
+        reservation.setUpdatedBy(actor);
         reservation.setUpdatedAt(Instant.now());
         return reservationCommandPort.save(reservation);
     }

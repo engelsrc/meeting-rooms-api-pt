@@ -13,7 +13,6 @@ import java.time.Instant;
 @Service
 public class CreateRoomHandler {
 
-    private static final String SYSTEM_USER = "system";
     private static final int NAME_MAX = 100;
     private static final int LOCATION_MAX = 255;
 
@@ -44,7 +43,7 @@ public class CreateRoomHandler {
         }
 
         Room room = new Room(name, command.capacity(), location);
-        room.setCreatedBy(SYSTEM_USER);
+        room.setCreatedBy(command.actorUsername());
         room.setCreatedAt(Instant.now());
         room.setDeleted(false);
         return roomCommandPort.save(room);
