@@ -11,9 +11,10 @@ Rama: `feature/005-minimum-tests`
   **Hecho cuando:** existe helper que hace `POST /api/auth/login` con `admin`/`admin` vía MockMvc y devuelve `accessToken`; usable desde tests A/B.  
   **Hecho:** 2026-11-26 — `AuthTestSupport.loginAdmin`.
 
-- [ ] **TEST-2** — CreateRoomAuthIT (RF-1)  
+- [x] **TEST-2** — CreateRoomAuthIT (RF-1)  
   **Título (EN):** `[tests] Create room 201 with JWT`  
-  **Hecho cuando:** clase `@SpringBootTest` + `@AutoConfigureMockMvc`: login → `POST /api/rooms` con Bearer y body válido → **201**; nombre de sala único; auth sí (JWT).
+  **Hecho cuando:** clase `@SpringBootTest` + `@AutoConfigureMockMvc`: login → `POST /api/rooms` con Bearer y body válido → **201**; nombre de sala único; auth sí (JWT).  
+  **Hecho:** 2026-11-26 — `CreateRoomAuthIT` pasa.
 
 - [ ] **TEST-3** — ReservationOverlapIT (RF-1)  
   **Título (EN):** `[tests] Reservation overlap returns 409`  
