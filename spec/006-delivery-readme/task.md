@@ -27,6 +27,7 @@ README raíz ES; bullets IA del humano; última task = Tiempo.
   **Hecho cuando:** sección “Cómo usé la IA” formatea solo esos bullets (qué pedí / acepté / corregí); agente no inventa hechos.  
   **Hecho:** 2026-11-26 — sección IA formateada desde bullets del humano.
 
-- [ ] **DOCS-5** — Update elapsed time (RF-3) — **última**  
+- [x] **DOCS-5** — Update elapsed time (RF-3) — **última**  
   **Título (EN):** `[docs] Update README elapsed time`  
-  **Hecho cuando:** sección Tiempo con t0 referenciado a `PRUEBA-INICIO.md` y duración actualizada al cierre de este RF; no modifica/borra `PRUEBA-INICIO.md`.
+  **Hecho cuando:** sección Tiempo con t0 referenciado a `PRUEBA-INICIO.md` y duración actualizada al cierre de este RF; no modifica/borra `PRUEBA-INICIO.md`.  
+  **Hecho:** 2026-11-26 — t0 + ~2 h 52 min; `PRUEBA-INICIO.md` intacto.

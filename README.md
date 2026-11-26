@@ -111,7 +111,9 @@ Hechos aportados por el autor de la prueba (formateados; sin ampliar):
 
 ## Tiempo
 
-_(Placeholder — DOCS-5: t0 desde `PRUEBA-INICIO.md` + duración al cierre del RF 006.)_
+- **t0** (reloj de la prueba): **2026-11-25 22:55:49 -06:00** — ver `PRUEBA-INICIO.md` (este README no lo sustituye).
+- **Duración orientativa al cerrar RF 006 (docs):** ~**2 h 52 min** (marca local ~2026-11-26 01:47 -06:00).
+- Límite del enunciado: ≤ 3 horas.
 
 ## Repo
 

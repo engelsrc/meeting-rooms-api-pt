@@ -105,4 +105,4 @@ Entregar un `README.md` en la raíz del repo (español) que cumpla el enunciado 
 - Si más adelante existieran plan/task y este RF cambia otra vez: marcarlos obsoletos y regenerar.
 
 ## Siguiente paso
-`Próxima acción: IMPLEMENTAR, ejecutar /ssd-cmd-implement spec/006-delivery-readme/rf.md`
+`Próxima acción: REVISAR EL RESULTADO, ejecutar /ssd-cmd-reviewer spec/006-delivery-readme/rf.md`
