@@ -32,9 +32,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** handler valida `endAt > startAt` (400), sala inexistente/soft-deleted (404), solape ACTIVE (409), persiste ACTIVE con `responsible='system'`, `created_by='system'`; vía command (CQRS).  
   **Hecho:** 2026-11-26 — `CreateReservationHandler` con lock/solape.
 
-- [ ] **API-4** — CancelReservation command (RF-4)  
+- [x] **API-4** — CancelReservation command (RF-4)  
   **Título (EN):** `[reservations] Cancel reservation command`  
-  **Hecho cuando:** handler con `reservationId`: inexistente → 404; ya CANCELLED → 409; ACTIVE → CANCELLED + `cancelled_by='system'` + `cancelled_at`; no muta soft-delete.
+  **Hecho cuando:** handler con `reservationId`: inexistente → 404; ya CANCELLED → 409; ACTIVE → CANCELLED + `cancelled_by='system'` + `cancelled_at`; no muta soft-delete.  
+  **Hecho:** 2026-11-26 — `CancelReservationHandler`.
 
 - [ ] **API-5** — ListReservations query (RF-3)  
   **Título (EN):** `[reservations] List reservations query`  
