@@ -31,6 +31,7 @@ Extra OpenAPI/Swagger delgado; sin tests nuevos obligatorios; docs en `local` y 
   **Hecho cuando:** `README.md` menciona `http://localhost:8080/swagger-ui/index.html`; no exige `/v3/api-docs`; no reescribe secciones obligatorias §7 de `006` (cómo ejecutar, decisiones, IA, tiempo).  
   **Hecho:** 2026-11-26 — URL Swagger UI en «Cómo ejecutarlo»; ítem OpenAPI quitado de «más tiempo».
 
-- [ ] **DOCS-3** — Smoke docs on local/prod profiles (RF-1, RF-2)  
+- [x] **DOCS-3** — Smoke docs on local/prod profiles (RF-1, RF-2)  
   **Título (EN):** `[docs] Smoke swagger-ui and api-docs`  
-  **Hecho cuando:** con la app arrancada, `GET http://localhost:8080/swagger-ui/index.html` → **200** (auth no); `GET http://localhost:8080/v3/api-docs` → **200** (auth no); no hay deshabilitación de springdoc en `application-prod.yml`; evidencia breve (curl/log) en el cierre de la tarea.
+  **Hecho cuando:** con la app arrancada, `GET http://localhost:8080/swagger-ui/index.html` → **200** (auth no); `GET http://localhost:8080/v3/api-docs` → **200** (auth no); no hay deshabilitación de springdoc en `application-prod.yml`; evidencia breve (curl/log) en el cierre de la tarea.  
+  **Hecho:** 2026-11-26 — perfil `prod`: `GET /swagger-ui/index.html` → 200; `GET /v3/api-docs` → 200 (sin Auth); `application-prod.yml` sin `springdoc.*.enabled=false`.
