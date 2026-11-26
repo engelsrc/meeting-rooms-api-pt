@@ -16,9 +16,10 @@ Extra OpenAPI/Swagger delgado; sin tests nuevos obligatorios; docs en `local` y 
   **Hecho cuando:** `SecurityConfig` declara `permitAll` para `/swagger-ui/**`, `/swagger-ui/index.html` (si aplica) y `/v3/api-docs` (y `/v3/api-docs/**` si hace falta); mutaciones `/api/**` siguen con JWT; GET `/api/**` y `POST /api/auth/login` siguen públicos. Auth docs: no. Auth mutaciones: sí.  
   **Hecho:** 2026-11-26 — `permitAll` explícito para swagger-ui y v3/api-docs; reglas `/api/**` intactas.
 
-- [ ] **API-1** — OpenAPI Bearer JWT scheme (RF-2)  
+- [x] **API-1** — OpenAPI Bearer JWT scheme (RF-2)  
   **Título (EN):** `[docs] OpenAPI bearer JWT security scheme`  
-  **Hecho cuando:** existe bean `OpenAPI` (p. ej. `OpenApiConfig`) con esquema HTTP Bearer JWT usable en Swagger UI («Authorize»); sin flujo OAuth2/password; sin documentar flujo login→token en código de este RF.
+  **Hecho cuando:** existe bean `OpenAPI` (p. ej. `OpenApiConfig`) con esquema HTTP Bearer JWT usable en Swagger UI («Authorize»); sin flujo OAuth2/password; sin documentar flujo login→token en código de este RF.  
+  **Hecho:** 2026-11-26 — `OpenApiConfig` con `SecurityScheme` HTTP Bearer JWT (`bearer-jwt`).
 
 - [ ] **API-2** — Minimal operation coverage and error codes (RF-3, RF-5)  
   **Título (EN):** `[docs] Annotate controllers error responses`  
