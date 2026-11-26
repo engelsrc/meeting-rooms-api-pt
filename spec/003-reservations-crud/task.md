@@ -17,9 +17,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** existen `Reservation`, `ReservationStatus` (ACTIVE/CANCELLED), `ReservationCommandPort` y `ReservationQueryPort` (save/find/overlap/lockRoom/list); sin lógica HTTP.  
   **Hecho:** 2026-11-26 — dominio + puertos command/query.
 
-- [ ] **API-1** — ErrorMessages and NotFoundException (RF-2, RF-3, RF-4)  
+- [x] **API-1** — ErrorMessages and NotFoundException (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] Error messages and NotFound`  
-  **Hecho cuando:** `ErrorMessages` incluye constantes EN para intervalo inválido, solape, sala/reserva no encontrada, ya cancelada, date inválida, roomId list inválido, page/size (incl. size>100); existe `NotFoundException`; `RestExceptionHandler` mapea NotFound → **404**.
+  **Hecho cuando:** `ErrorMessages` incluye constantes EN para intervalo inválido, solape, sala/reserva no encontrada, ya cancelada, date inválida, roomId list inválido, page/size (incl. size>100); existe `NotFoundException`; `RestExceptionHandler` mapea NotFound → **404**.  
+  **Hecho:** 2026-11-26 — constantes + `NotFoundException` → 404.
 
 - [ ] **API-2** — JPA adapter with overlap and room lock (RF-1, RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] JPA adapter lock and overlap`  
