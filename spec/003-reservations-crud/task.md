@@ -22,9 +22,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** `ErrorMessages` incluye constantes EN para intervalo inválido, solape, sala/reserva no encontrada, ya cancelada, date inválida, roomId list inválido, page/size (incl. size>100); existe `NotFoundException`; `RestExceptionHandler` mapea NotFound → **404**.  
   **Hecho:** 2026-11-26 — constantes + `NotFoundException` → 404.
 
-- [ ] **API-2** — JPA adapter with overlap and room lock (RF-1, RF-2, RF-3, RF-4)  
+- [x] **API-2** — JPA adapter with overlap and room lock (RF-1, RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] JPA adapter lock and overlap`  
-  **Hecho cuando:** entity/repo/adapter persisten reservas; detectan solape ACTIVE `[start,end)`; lock pesimista de sala en create; list orden `startAt ASC, id ASC` con filtros opcionales.
+  **Hecho cuando:** entity/repo/adapter persisten reservas; detectan solape ACTIVE `[start,end)`; lock pesimista de sala en create; list orden `startAt ASC, id ASC` con filtros opcionales.  
+  **Hecho:** 2026-11-26 — JPA + overlap + `findByIdForUpdate`.
 
 - [ ] **API-3** — CreateReservation command (RF-2)  
   **Título (EN):** `[reservations] Create reservation command`  
