@@ -42,9 +42,10 @@ Convención: auditoría + soft delete en **todas** las tablas (RF-5).
   **Hecho cuando:** `V1__schema_meta.sql` (o migración equivalente en H2 mem) incluye en `schema_meta`: `created_by` VARCHAR(100) NOT NULL, `created_at`, `updated_by` nullable, `updated_at` nullable, `is_deleted` default false, `deleted_by` nullable, `deleted_at` nullable; el INSERT seed rellena `created_by` (p. ej. `system`), `created_at` e `is_deleted=false`; sin tablas rooms/reservations; la convención queda documentada en plan/RF para tablas futuras.  
   **Hecho:** 2026-11-25 — V1 con columnas de auditoría; seed `created_by=system`, `is_deleted=false`.
 
-- [ ] **DB-8** — Re-verify app starts after audit migration (RF-3, RF-5)  
+- [x] **DB-8** — Re-verify app starts after audit migration (RF-3, RF-5)  
   **Título (EN):** `[persistence] Re-verify app starts after audit migration`  
-  **Hecho cuando:** `mvn -DskipTests spring-boot:run` con perfil default `prod` arranca sin error; Flyway aplica V1 con columnas de auditoría; evidencia en logs (Started + migration v1); opcionalmente `local` también OK.
+  **Hecho cuando:** `mvn -DskipTests spring-boot:run` con perfil default `prod` arranca sin error; Flyway aplica V1 con columnas de auditoría; evidencia en logs (Started + migration v1); opcionalmente `local` también OK.  
+  **Hecho:** 2026-11-25 — `prod` y `local`: Flyway V1 + Started MeetingRoomsApiApplication OK.
 
 ## Notas
 - Prefijos: `DB` = persistencia/scaffold.
