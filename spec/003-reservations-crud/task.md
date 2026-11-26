@@ -42,12 +42,13 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** query aplica `roomId`/`date` (día `startAt` en `America/Mexico_City`)/`page`/`size` (defaults 0/20); inválidos y `size>100` → 400; `roomId` sala inexistente → 400; resultado paginado ordenado.  
   **Hecho:** 2026-11-26 — `ListReservationsHandler` zona MX.
 
-- [ ] **API-6** — REST create list cancel (RF-2, RF-3, RF-4)  
+- [x] **API-6** — REST create list cancel (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] REST create list cancel`  
   **Hecho cuando:**  
   - `POST /api/reservations` body `{ roomId, startAt, endAt }` → **201** `{ id, roomId, responsible, startAt, endAt, status }`; auth **no**; 400/404/409 según RF.  
   - `GET /api/reservations?roomId=&date=&page=&size=` → **200** `{ items, page, size, total }`; auth **no**.  
-  - `POST /api/reservations/cancel` body `{ reservationId }` → **200** DTO; auth **no**; 404/409 según RF.
+  - `POST /api/reservations/cancel` body `{ reservationId }` → **200** DTO; auth **no**; 404/409 según RF.  
+  **Hecho:** 2026-11-26 — `ReservationController` POST/GET/cancel.
 
 - [ ] **API-7** — Smoke verify reservations flow (RF-2, RF-3, RF-4)  
   **Título (EN):** `[reservations] Smoke create list cancel overlap`  
