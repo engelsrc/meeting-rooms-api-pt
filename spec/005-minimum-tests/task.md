@@ -16,9 +16,10 @@ Rama: `feature/005-minimum-tests`
   **Hecho cuando:** clase `@SpringBootTest` + `@AutoConfigureMockMvc`: login → `POST /api/rooms` con Bearer y body válido → **201**; nombre de sala único; auth sí (JWT).  
   **Hecho:** 2026-11-26 — `CreateRoomAuthIT` pasa.
 
-- [ ] **TEST-3** — ReservationOverlapIT (RF-1)  
+- [x] **TEST-3** — ReservationOverlapIT (RF-1)  
   **Título (EN):** `[tests] Reservation overlap returns 409`  
-  **Hecho cuando:** clase distinta: login → create room → create reservation ACTIVE → segunda reservation solapada (mismo Bearer) → **409**; auth sí.
+  **Hecho cuando:** clase distinta: login → create room → create reservation ACTIVE → segunda reservation solapada (mismo Bearer) → **409**; auth sí.  
+  **Hecho:** 2026-11-26 — `ReservationOverlapIT` pasa.
 
 - [ ] **TEST-4** — ListRoomsPublicIT (RF-1, RF-2)  
   **Título (EN):** `[tests] List rooms 200 without auth`  
