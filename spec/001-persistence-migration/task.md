@@ -26,9 +26,10 @@ Sin endpoints de salas/reservas; sin tablas de negocio.
   **Hecho cuando:** existe `src/main/resources/db/migration/V1__*.sql` con SQL mínimo **no** de negocio (p. ej. `schema_meta`); no existen tablas `rooms`/`reservations` en migraciones.  
   **Hecho:** 2026-11-25 — `V1__schema_meta.sql` (tabla `schema_meta`); sin rooms/reservations.
 
-- [ ] **DB-5** — Create CA CQRS package skeleton (RF-4)  
+- [x] **DB-5** — Create CA CQRS package skeleton (RF-4)  
   **Título (EN):** `[persistence] Create CA CQRS package skeleton`  
-  **Hecho cuando:** existen paquetes `domain.model`, `application.command`, `application.query`, `infrastructure.entrypoints`, `infrastructure.adapters`, `infrastructure.config` bajo el base package; no hay controllers REST de salas/reservas.
+  **Hecho cuando:** existen paquetes `domain.model`, `application.command`, `application.query`, `infrastructure.entrypoints`, `infrastructure.adapters`, `infrastructure.config` bajo el base package; no hay controllers REST de salas/reservas.  
+  **Hecho:** 2026-11-25 — `package-info.java` en los 6 paquetes; sin controllers de negocio.
 
 - [ ] **DB-6** — Verify app starts with Flyway (RF-1, RF-2, RF-3)  
   **Título (EN):** `[persistence] Verify app starts with Flyway`  
