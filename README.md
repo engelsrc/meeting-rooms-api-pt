@@ -26,7 +26,19 @@ Propiedades relevantes (valores actuales = **demo de la prueba**; no subas secre
 - `app.jwt.secret` (mín. longitud HS256)
 - `app.jwt.expiration-ms`
 
-Arranque:
+### Clonar el repositorio
+
+Clona el repo y usa la rama `main` o `dev` (ambas sirven para ejecutar la demo):
+
+```bash
+git clone https://github.com/engelsrc/meeting-rooms-api-pt.git
+cd meeting-rooms-api-pt
+git checkout main   # o: git checkout dev
+```
+
+### Arranque
+
+Luego arranca la aplicación:
 
 ```bash
 mvn spring-boot:run
