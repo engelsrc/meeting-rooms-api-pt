@@ -26,9 +26,10 @@ JWT HS256 TTL 1h; users seed admin/user; GET públicos; mutaciones Bearer.
   **Hecho cuando:** GET `/api/**` y `POST /api/auth/login` permitAll; resto `/api/**` autenticado; sin header / Bearer vacío / scheme ≠ Bearer → **403**; JWT inválido/expirado → **401** con `ErrorMessages`; CSRF off; session STATELESS.  
   **Hecho:** 2026-11-26 — SecurityConfig + JwtAuthenticationFilter.
 
-- [ ] **API-1** — Login command and POST /api/auth/login (RF-2)  
+- [x] **API-1** — Login command and POST /api/auth/login (RF-2)  
   **Título (EN):** `[auth] Login endpoint`  
-  **Hecho cuando:** `POST /api/auth/login` body `{ username, password }` → **200** `{ accessToken }` (auth **no**); blank/ausente → **400**; JSON malo → **400**; user inexistente → **401** mensaje distinto; password malo → **401** mensaje distinto; vía command/handler.
+  **Hecho cuando:** `POST /api/auth/login` body `{ username, password }` → **200** `{ accessToken }` (auth **no**); blank/ausente → **400**; JSON malo → **400**; user inexistente → **401** mensaje distinto; password malo → **401** mensaje distinto; vía command/handler.  
+  **Hecho:** 2026-11-26 — AuthController + LoginHandler.
 
 - [ ] **API-2** — Wire identity into room and reservation mutations (RF-4)  
   **Título (EN):** `[auth] Propagate username to audit fields`  

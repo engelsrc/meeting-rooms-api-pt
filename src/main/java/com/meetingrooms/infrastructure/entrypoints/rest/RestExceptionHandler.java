@@ -2,6 +2,7 @@ package com.meetingrooms.infrastructure.entrypoints.rest;
 
 import com.meetingrooms.application.ConflictException;
 import com.meetingrooms.application.NotFoundException;
+import com.meetingrooms.application.UnauthorizedException;
 import com.meetingrooms.application.ValidationException;
 import com.meetingrooms.shared.ErrorMessages;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +18,11 @@ public class RestExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ErrorResponse> handleValidation(ValidationException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getMessageKey()));
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorized(UnauthorizedException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(ex.getMessageKey()));
     }
 
     @ExceptionHandler(NotFoundException.class)
