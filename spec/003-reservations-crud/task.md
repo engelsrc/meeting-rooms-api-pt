@@ -27,9 +27,10 @@ Zona fija: `America/Mexico_City`.
   **Hecho cuando:** entity/repo/adapter persisten reservas; detectan solape ACTIVE `[start,end)`; lock pesimista de sala en create; list orden `startAt ASC, id ASC` con filtros opcionales.  
   **Hecho:** 2026-11-26 — JPA + overlap + `findByIdForUpdate`.
 
-- [ ] **API-3** — CreateReservation command (RF-2)  
+- [x] **API-3** — CreateReservation command (RF-2)  
   **Título (EN):** `[reservations] Create reservation command`  
-  **Hecho cuando:** handler valida `endAt > startAt` (400), sala inexistente/soft-deleted (404), solape ACTIVE (409), persiste ACTIVE con `responsible='system'`, `created_by='system'`; vía command (CQRS).
+  **Hecho cuando:** handler valida `endAt > startAt` (400), sala inexistente/soft-deleted (404), solape ACTIVE (409), persiste ACTIVE con `responsible='system'`, `created_by='system'`; vía command (CQRS).  
+  **Hecho:** 2026-11-26 — `CreateReservationHandler` con lock/solape.
 
 - [ ] **API-4** — CancelReservation command (RF-4)  
   **Título (EN):** `[reservations] Cancel reservation command`  
