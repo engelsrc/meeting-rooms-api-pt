@@ -7,8 +7,9 @@ Fuente: `.cursor/agents/constitution.md` + comandos `ssd-cmd-*` + rules + agente
 
 | Tema | Decisión |
 |------|----------|
-| Git | Commits por tarea; al close del RF: merge `dev` local → push → pull → verificar → `close.md` |
+| Git | Commits por tarea; al close del RF: merge `dev` local → push → pull → verificar → cerrar Issue → `close.md` |
 | Ramas | Una rama `feature/<carpeta>` por RF |
+| Issues | **Una** por RF: **open** en `/ssd-cmd-task` antes de implementar; **closed** en `/ssd-cmd-close` |
 | Artefacto RF | `spec/<carpeta>/rf.md` |
 | Crear RF | `/ssd-cmd-create-rf` |
 | Lenguaje | enunciado vigente ≠ RF; comandos dicen RF |

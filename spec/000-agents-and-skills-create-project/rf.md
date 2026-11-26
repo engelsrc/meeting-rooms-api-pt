@@ -9,6 +9,7 @@ Estado: aprobada
 - Tipo: `Meta` | `Git` | `Comando`
 - Origen: change tras clarify; reconstrucción del alcance meta
 - Fecha: 2026-11-25
+- GitHub Issue: #1 — https://github.com/engelsrc/meeting-rooms-api-pt/issues/1
 
 ## Problema / oportunidad
 
@@ -31,13 +32,12 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 - Comprobar que el trabajo parte de la rama **`main`**.
 - Crear la rama **`dev`** desde `main` y dejar `origin` configurado (`main` y `dev` en remoto según el flujo acordado).
 - Marcador de reloj: `PRUEBA-INICIO.md` en la raíz (evidencia de t0).
-- Documentar el mapa de RF de producto `001`…`008` (solo orden; **no** crear esas carpetas en este RF).
+- Documentar el mapa de RF de producto (solo orden; **no** crear esas carpetas en este RF). Actualizado tras 003: solape/filtros absorbidos; numeración realineada.
 
 ### Excluye
 - Scaffold Spring Boot / código de la API (va en `001`…).
 - Crear o restaurar **skills** SDD: si no existen, no se crean; el flujo es **comandos**. Si en el futuro aparecen skills, no son gate de este RF.
 - Abrir PR automáticamente.
-- GitHub Issues obligatorias (Lote 0 = `task.md`).
 - Crear carpetas `spec/001-…` … `008-…` en este RF.
 - Empezar RF `001` antes de que este `000` tenga `close.md`.
 
@@ -93,7 +93,8 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 
 #### Criterios de aceptación
 - [ ] Queda explícito: **no** abrir `001`…`008` hasta `close.md` de este `000`.
-- [ ] El mapa de orden de producto queda documentado: `001-persistence-migrations` → `002-rooms-create-list` → `003-reservations-crud` → `004-overlap-409-validation-400` → `005-reservations-filters-pagination` → `006-auth-mutations` → `007-minimum-tests` → `008-delivery-readme`.
+- [x] El mapa de orden de producto queda documentado (vigente): `001-persistence-migration` → `002-rooms-create-list` → `003-reservations-crud` → `004-auth-mutations` → `005-minimum-tests` → `006-delivery-readme`.  
+  Nota: los antiguos `004-overlap…` / `005-filters…` / ex-`006` auth se absorbieron en 003 o se renumeraron; no hay carpetas huérfanas 004–005 del mapa viejo.
 
 ### RF-7 — Cadena SDD de este meta
 **EL SISTEMA** trata este `000` con la misma cadena: plan → task → implement (commits en `feature/000-agents-and-skills-create-project`) → reviewer → close (merge a `dev` local → push → pull → verificar).
@@ -106,7 +107,7 @@ Dejar **listo y en control de versiones** el proceso Cursor (constitución, coma
 - Reutilizar artefactos existentes; no duplicar constitución/comandos “desde cero” si ya cumplen.
 - Repo GitHub: público, nombre fijo `meeting-rooms-api-pt`, dueño = cuenta personal.
 - Una rama de trabajo por este RF; integración a `dev` solo en close.
-- Lote 0 local en `task.md`.
+- Una GitHub Issue por este RF; detalle de tareas en `task.md`.
 
 ## Casos límite
 - Si `PRUEBA-INICIO.md` se borra: recrearlo antes de cualquier `/ssd-cmd-implement` de API.

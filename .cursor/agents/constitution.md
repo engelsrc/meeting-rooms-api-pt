@@ -38,7 +38,7 @@ Entrega: mándame por aquí el enlace a un repositorio público de GitHub en un 
 ## Idiomas
 - Chat con el humano y documentos SDD (RF, plan, criterios de aceptación de issues, informes): **español**.
 - Código, comentarios de código, logs y **mensajes de error de la API**: **inglés**.
-- Git según `.cursor/rules/git-workflow.mdc`: al primer scaffold/kickoff **crear `dev`** si no existe; **una rama por RF** desde **`dev`** (inglés); **commits por tarea** en esa rama (español); **sin** merge/push hasta el close. Al **cerrar cada RF** (`/ssd-cmd-close`): **merge a `dev` local → push `origin/dev` → pull → verificar → `close.md`**. PR manuales (humano).
+- Git según `.cursor/rules/git-workflow.mdc`: al primer scaffold/kickoff **crear `dev`** si no existe; **una rama por RF** desde **`dev`** (inglés); **commits por tarea** en esa rama (español); **sin** merge/push hasta el close. **Antes de implementar:** GitHub Issue del RF en estado **open**. Al **cerrar cada RF** (`/ssd-cmd-close`): **merge a `dev` local → push `origin/dev` → pull → verificar → cerrar Issue (closed) → `close.md`**. PR manuales (humano).
 
 ## Decisiones de repo (enunciado vigente)
 Convenciones de **este** repo para la prueba actual (no sustituyen el enunciado; lo complementan). Una prueba nueva puede cambiarlas al reemplazar el enunciado y el agente:
@@ -46,7 +46,7 @@ Convenciones de **este** repo para la prueba actual (no sustituyen el enunciado;
 - Mapeo **DTO ↔ dominio** (o DTO ↔ command/query).
 - Mensajes de error de API vía clase de constantes (p. ej. `ErrorMessages`); **sin literales quemados**.
 - Perfiles Spring **`local`** y **`prod`** (`application-local.yml` / `application-prod.yml`); base compartida sin secretos de prod en el repo.
-- Entrega orientada a **commits frecuentes** por tarea y `dev` remoto al día al **cerrar cada RF**. **Lote 0 local** (`task.md`).
+- Entrega orientada a **commits frecuentes** por tarea y `dev` remoto al día al **cerrar cada RF**. **Una GitHub Issue por RF**: se crea en `/ssd-cmd-task` (estado **open**) **antes** de `/ssd-cmd-implement`; se cierra en GitHub en `/ssd-cmd-close`. El desglose de trabajo sigue en `task.md`.
 - Reloj: evidencia en `PRUEBA-INICIO.md` (raíz). Sin ese marcador, no implementar la API de salas.
 
 ## Tiempo y extras
@@ -77,7 +77,7 @@ Convenciones de **este** repo para la prueba actual (no sustituyen el enunciado;
 - Fijar stack/arquitectura **fuera** del enunciado vigente / decisiones de repo acordadas (al cambiar de prueba, actualizar enunciado + agente; no dejar restos contradictorios).
 - Sobreingeniería antes de cerrar lo obligatorio (p. ej. event bus, read DB separada, o infra extra encima de Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado).
 - Extras cosméticos que no aporten cuando aún faltan requisitos.
-- Bloquear la implementación por no tener GitHub Issues (el kickoff es local).
+- Implementar un RF sin GitHub Issue **open** asociada (1 Issue por RF; crearla en `/ssd-cmd-task` antes de implementar; cerrarla solo en `/ssd-cmd-close`).
 - Commits con secretos o credenciales reales.
 - Un solo commit monstruoso al final.
 - Literales de mensaje de error en código; mensajes de API en español.

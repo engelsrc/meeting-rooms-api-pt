@@ -3,16 +3,18 @@ target/
 .idea/
 *.iml
 .vscode/
+*.classpath
+*.project
+.settings/
 *.class
 *.jar
 *.war
+*.log
 
 # Env / secrets
 .env
 .env.*
 !.env.example
-**/application-prod.yml
-!**/application-prod.yml.example
 
 # OS
 Thumbs.db

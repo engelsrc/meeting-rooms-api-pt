@@ -18,13 +18,13 @@ Constitución: `.cursor/agents/constitution.md`.
 | Momento | Qué hacer |
 |---------|-----------|
 | Cada **tarea** (`/ssd-cmd-implement`) | Commits en la **rama del RF** (`feature/<carpeta>`). **Sin** merge a `dev`. **Sin** push. |
-| Fin del **RF** (`/ssd-cmd-close`, tras review **cumple**) | Merge de esa rama a **`dev` local** → **`git push origin dev`** → **`git pull origin dev`** → **verificar** → crear `close.md` |
+| Fin del **RF** (`/ssd-cmd-close`, tras review **cumple**) | Merge de esa rama a **`dev` local** → **`git push origin dev`** → **`git pull origin dev`** → **verificar** → **cerrar Issue del RF** → crear `close.md` |
 
 **Pull requests:** manuales (humano). El agente **no** abre PR.
 
 ## Regla principal — durante implementación
 
-1. Tarea pendiente en `spec/<carpeta>/task.md` (Lote 0 local; no GitHub Issues obligatorias)
+1. Tarea pendiente en `spec/<carpeta>/task.md` y **Issue GitHub del RF** en estado **open** (`rf.md` → `GitHub Issue: #N`). Sin Issue open → no implementar.
 2. **Asegurar `dev`** — si no existe, crearla desde `main`/HEAD (solo con reloj arrancado o scaffold pedido)
 3. **Una rama por RF:** `feature/<carpeta>` desde `dev` (inglés). Reutilizarla en todas las tareas del RF
 4. **Implementar** + **commits** en esa rama (español, conventional commits)
@@ -41,7 +41,8 @@ Orden fijo:
 4. **`git push origin dev`**
 5. **`git pull origin dev`**
 6. **Verificar** desarrollo en `dev`
-7. Escribir `spec/<carpeta>/close.md`
+7. **Cerrar la GitHub Issue** del RF (`gh issue close <N>`)
+8. Escribir `spec/<carpeta>/close.md` (incluye número/URL de la Issue)
 
 Si no hay `origin`, documentar push pendiente; no fingir sync.
 
@@ -76,9 +77,13 @@ git pull origin dev
 # verificar → close.md
 ```
 
-## Issues — Lote 0 local
+## Issues — una por RF (ciclo open → closed)
 
-Estado en `spec/<carpeta>/task.md`. No exigir GitHub Issues.
+- **Una** GitHub Issue por carpeta `spec/<NNN>-…` (no una por tarea).
+- **Creación (open):** `/ssd-cmd-task` tras escribir `task.md`. Debe quedar en estado **open** **antes** de `/ssd-cmd-implement`. Si falta al implementar: crearla (open) y anotar; no codificar sin ella.
+- Referencia obligatoria en `rf.md`: `GitHub Issue: #N` (y URL).
+- **Cierre (closed):** `/ssd-cmd-close` tras verificar `dev` → `gh issue close <N>` (cierra también la Issue en GitHub).
+- Detalle de trabajo y casillas: `task.md`.
 
 ## Validaciones antes de dar por cerrado el RF
 
@@ -86,5 +91,6 @@ Estado en `spec/<carpeta>/task.md`. No exigir GitHub Issues.
 - [ ] Merge en `dev` local hecho
 - [ ] `origin/dev` actualizado (o push pendiente documentado)
 - [ ] Verificación de que el código del RF está en `dev`
+- [ ] Issue del RF cerrada
 - [ ] `close.md` creado
 - [ ] Clean Architecture (CA) + Command Query Responsibility Segregation (CQRS) delgado; `ErrorMessages` EN
