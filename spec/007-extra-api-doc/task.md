@@ -26,9 +26,10 @@ Extra OpenAPI/Swagger delgado; sin tests nuevos obligatorios; docs en `local` y 
   **Hecho cuando:** en Swagger UI / `/v3/api-docs` aparecen al menos: `POST /api/auth/login`, `POST|GET /api/rooms`, `POST|GET /api/reservations`, `POST /api/reservations/cancel`; documentados de forma mínima códigos **400**, **401** y/o **403**, **409** donde aplique; sin ejemplos elaborados de body; sin operaciones inventadas.  
   **Hecho:** 2026-11-26 — `@Tag`/`@ApiResponses` en Auth, Rooms, Reservations; Bearer en mutaciones.
 
-- [ ] **DOCS-2** — README Swagger UI URL (RF-4)  
+- [x] **DOCS-2** — README Swagger UI URL (RF-4)  
   **Título (EN):** `[docs] README link to Swagger UI`  
-  **Hecho cuando:** `README.md` menciona `http://localhost:8080/swagger-ui/index.html`; no exige `/v3/api-docs`; no reescribe secciones obligatorias §7 de `006` (cómo ejecutar, decisiones, IA, tiempo).
+  **Hecho cuando:** `README.md` menciona `http://localhost:8080/swagger-ui/index.html`; no exige `/v3/api-docs`; no reescribe secciones obligatorias §7 de `006` (cómo ejecutar, decisiones, IA, tiempo).  
+  **Hecho:** 2026-11-26 — URL Swagger UI en «Cómo ejecutarlo»; ítem OpenAPI quitado de «más tiempo».
 
 - [ ] **DOCS-3** — Smoke docs on local/prod profiles (RF-1, RF-2)  
   **Título (EN):** `[docs] Smoke swagger-ui and api-docs`  

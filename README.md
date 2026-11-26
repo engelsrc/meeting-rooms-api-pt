@@ -36,6 +36,8 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 
 URL base de los ejemplos: **`http://localhost:8080`**
 
+Documentación interactiva (Swagger UI): **`http://localhost:8080/swagger-ui/index.html`**
+
 Usuario seed (migración V4): `admin` / `admin` (también existe `user` / `user`).
 
 ## Endpoints
@@ -96,10 +98,9 @@ Suite mínima: 3 clases `@SpringBootTest` + MockMvc (`CreateRoomAuthTest`, `Rese
 ## Qué haría con más tiempo
 
 1. **PostgreSQL real + Docker Compose** para `local`/`prod` (hoy ambos perfiles usan H2 demo).
-2. **OpenAPI/Swagger** generado y ejemplos de error 400/401/403/409.
-3. **Más tests:** cancelación, filtros de reservas, unique name → 409, casos borde de solape.
-4. **Hardening JWT:** secretos solo por env/secret manager; rotación; refresh tokens opcionales.
-5. **Observabilidad mínima:** health/metrics y logging estructurado de conflictos de reserva.
+2. **Más tests:** cancelación, filtros de reservas, unique name → 409, casos borde de solape.
+3. **Hardening JWT:** secretos solo por env/secret manager; rotación; refresh tokens opcionales.
+4. **Observabilidad mínima:** health/metrics y logging estructurado de conflictos de reserva.
 
 ## Cómo usé la IA
 
